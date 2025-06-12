@@ -284,6 +284,7 @@ a {
     -moz-user-select: none;
     -ms-user-select: none;
     -webkit-user-drag: none;
+    filter: drop-shadow(15px 15px 20px rgba(0,0,0,0.4));
 }
 
 .shirt {
@@ -293,6 +294,7 @@ a {
     transition: transform 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     transform-origin: center center;
     will-change: transform;
+    filter: drop-shadow(5px 5px 10px rgba(0,0,0,0.2));
 }
 
 .shirt.grabbed {
@@ -402,6 +404,7 @@ a {
         top: 45%;
         left: 50%;
         /* transform: translate(-50%, -50%); is inherited */
+        filter: drop-shadow(15px 15px 20px rgba(0,0,0,0.4));
     }
 
     #info-tooltip { 
