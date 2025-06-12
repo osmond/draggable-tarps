@@ -8,6 +8,9 @@
     "test": "node test/test.js",
     "start": "npx serve -s ."
   },
+  "devDependencies": {
+    "serve": "^14.2.0"
+  },
   "keywords": [],
   "author": "",
   "license": "MIT"
