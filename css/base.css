@@ -146,8 +146,10 @@ a {
     justify-self: start;
   }
 
-  .frame__github {
+  .frame__social {
     grid-area: github;
+    display: flex;
+    gap: 1rem;
   }
 
   .frame__back,
