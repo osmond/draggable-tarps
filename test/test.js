@@ -5,9 +5,5 @@ assert.strictEqual(1 + 1, 2);
 console.log('Basic math test passed');
 
 const html = fs.readFileSync('index.html', 'utf8');
-assert(
-  html.includes('class="suggestion-form"') &&
-    html.includes('formspree.io/f/xqabqyaa'),
-  'Suggestion form markup missing'
-);
-console.log('Form markup exists');
+assert(!html.includes('formspree.io'), 'Formspree markup should be removed');
+console.log('Formspree markup removed');
