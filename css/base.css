@@ -10,7 +10,8 @@
   /* Cheerful, subtle gradient background */
   --color-text: #f2f2f2;      /* light text for contrast */
   /* Soft light blue background */
-  --color-bg: #e8f9ff;
+  /* Slightly darker but cheerful blue background */
+  --color-bg: #b3e5ff;
 
   --color-link: #000;
   --color-link-hover: #333;
