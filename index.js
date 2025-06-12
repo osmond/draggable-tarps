@@ -447,13 +447,25 @@ document.addEventListener('DOMContentLoaded', () => {
       event.preventDefault();
       const text = suggestInput.value.trim();
       if (text) {
-        const message = document.createElement('div');
-        message.className = 'suggest-marquee';
-        message.textContent = `That's a great idea! I would love to see him wearing ${text}! Please email me so I don't forget.`;
-        suggestMessagesContainer.appendChild(message);
-        message.addEventListener('animationend', () => {
-          message.remove();
+        const wrapper = document.createElement('div');
+        wrapper.className = 'suggest-marquee';
+
+        const bird = document.createElement('span');
+        bird.className = 'suggest-bird';
+        bird.textContent = '🐦';
+
+        const messageText = document.createElement('span');
+        messageText.className = 'suggest-text';
+        messageText.textContent = `That's a great idea! I would love to see him wearing ${text}! Please email me so I don't forget.`;
+
+        wrapper.appendChild(bird);
+        wrapper.appendChild(messageText);
+        suggestMessagesContainer.appendChild(wrapper);
+
+        wrapper.addEventListener('animationend', () => {
+          wrapper.remove();
         });
+
         suggestInput.value = '';
         suggestInputContainer.classList.remove('open');
         suggestLink.focus();

@@ -512,23 +512,43 @@ a {
 
     left: 0;
     right: 0;
-    overflow: hidden;
+    overflow: visible;
     pointer-events: none;
     z-index: 1010;
     text-align: center;
 }
 
 .suggest-marquee {
-    display: inline-block;
+    display: inline-flex;
+    align-items: flex-end;
     white-space: nowrap;
+    animation: suggest-scroll 35s linear forwards;
+    position: relative;
+}
+
+.suggest-text {
     background-color: rgba(255, 255, 255, 0.9);
     color: #000;
     padding: 0.5rem 1rem;
     border-radius: 6px;
     font-family: ui-monospace, monospace;
+}
 
-    animation: suggest-scroll 35s linear forwards;
+.suggest-bird {
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+    position: relative;
+    animation: bird-flap 0.6s ease-in-out infinite;
+}
 
+.suggest-bird::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 1px;
+    height: 20px;
+    background: #000;
 }
 
 @keyframes suggest-scroll {
@@ -539,3 +559,13 @@ a {
         transform: translateX(-100%);
     }
 }
+
+@keyframes bird-flap {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
