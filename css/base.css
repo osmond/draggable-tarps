@@ -449,7 +449,6 @@ a {
 }
 
 /* Suggestion feature */
-#suggestion-container,
 .suggestion-container {
     position: absolute;
     top: 1rem;
@@ -508,7 +507,7 @@ a {
 .suggest-messages {
     position: fixed;
 
-    top: 1rem;
+    top: 0;
 
     left: 0;
     right: 0;
@@ -527,7 +526,7 @@ a {
     border-radius: 6px;
     font-family: ui-monospace, monospace;
 
-    animation: suggest-scroll 20s linear forwards;
+    animation: suggest-scroll 35s linear forwards;
 
 }
 
