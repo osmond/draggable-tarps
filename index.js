@@ -29,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // --- State Variables ---
-  let currentMode = 'mouse'; // Intended for future use, perhaps to switch between different model types or interaction modes.
   const validHoverPaths = []; // Stores absolute URL pathnames for valid hover images (e.g., ".../white-tshirt-model-hover.png"). Used to ensure we only attempt to load existing hover images.
 
   // --- Image Path Collection and Preloading ---
@@ -104,16 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Helper Functions ---
 
-  // Finds a shirt DOM element by its 'data-shirt-name' attribute.
-  // Not currently used in the active drag-and-drop logic but could be useful for other features.
-  function findShirtElementByName(name) {
-    for (const shirt of shirts) {
-      if (shirt.getAttribute('data-shirt-name') === name) {
-        return shirt;
-      }
-    }
-    return null;
-  }
 
   // Updates the tooltip text based on the MODEL_INFO.
   function updateTooltip() {
