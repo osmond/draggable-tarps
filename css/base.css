@@ -264,16 +264,6 @@ a {
     color: #333;
 }
 
-.suggestion-form {
-    position: absolute;
-    top: var(--page-padding);
-    right: var(--page-padding);
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    z-index: 1000;
-}
 
 /* Shirts Area */
 .shirts-container {
