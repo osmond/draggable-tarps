@@ -442,8 +442,46 @@ a {
     }
 }
 @media (min-width: 378px) and (max-width: 429px) {
-    #info-tooltip { 
+    #info-tooltip {
         top: 25%;
         left: 65%;
     }
+}
+
+/* Suggestion feature */
+#suggestion-container {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    text-align: right;
+    color: #000;
+    font-family: ui-monospace, monospace;
+}
+
+#suggest-link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.suggest-input-container {
+    margin-top: 0.5rem;
+    opacity: 0;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    display: inline-block;
+}
+
+.suggest-input-container.open {
+    opacity: 1;
+    transform: scaleY(1);
+}
+
+#suggestions-list {
+    margin-top: 0.5rem;
+    padding-left: 1rem;
+    list-style-type: disc;
+    color: #000;
+    max-height: 200px;
+    overflow-y: auto;
 }
