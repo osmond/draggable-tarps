@@ -6,12 +6,11 @@
 
 :root {
   font-size: 12px;
-  --color-text: #000;
-  /* Subtle light background for improved contrast while retaining readability */
-  /* Slightly darker background for improved readability */
-  --color-bg: #e0e0e0;
-  --color-link: #000;
-  --color-link-hover: #333;
+  /* Accessible dark theme colors */
+  --color-text: #f2f2f2;      /* light text for contrast */
+  --color-bg: #2b2b2b;        /* dark, subdued background */
+  --color-link: #8ab4f8;      /* muted blue links */
+  --color-link-hover: #d0e0ff; /* lighter blue on hover */
   --page-padding: 1.5rem;
 }
 
