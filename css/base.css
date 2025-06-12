@@ -449,6 +449,7 @@ a {
 }
 
 /* Suggestion feature */
+#suggestion-container,
 .suggestion-container {
     position: absolute;
     top: 1rem;
