@@ -8,6 +8,9 @@
     "test": "node test/test.js",
     "start": "npx serve -s ."
   },
+  "devDependencies": {
+    "jsdom": "^24.0.0"
+  },
   "keywords": [],
   "author": "",
   "license": "MIT"
