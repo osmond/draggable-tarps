@@ -8,6 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const shirts = document.querySelectorAll('.shirt'); // Select all elements with the class 'shirt' (product images)
   const centerImage = document.getElementById('centerImage'); // Select the main display image element
   const infoTooltip = document.getElementById('info-tooltip'); // Select the tooltip element
+  const suggestLink = document.getElementById('suggest-link');
+  const suggestInputContainer = document.getElementById('suggest-input-container');
+  const suggestInput = document.getElementById('suggest-input');
+  const suggestSubmit = document.getElementById('suggest-submit');
+  const suggestionsList = document.getElementById('suggestions-list');
 
   // --- Configuration and Constants ---
   const MODEL_INFO = {
@@ -426,6 +431,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initial call to set up the tooltip text.
   updateTooltip();
+
+  // --- Suggestion Feature ---
+  if (suggestLink && suggestInputContainer && suggestInput && suggestSubmit && suggestionsList) {
+    suggestLink.addEventListener('click', (event) => {
+      event.preventDefault();
+      suggestInputContainer.classList.toggle('open');
+      if (suggestInputContainer.classList.contains('open')) {
+        suggestInput.focus();
+      }
+    });
+
+    function handleSuggestSubmit(event) {
+      event.preventDefault();
+      const text = suggestInput.value.trim();
+      if (text) {
+        const li = document.createElement('li');
+        li.textContent = text;
+        suggestionsList.appendChild(li);
+        suggestInput.value = '';
+      }
+    }
+
+    suggestSubmit.addEventListener('click', handleSuggestSubmit);
+    suggestInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        handleSuggestSubmit(event);
+      }
+    });
+  }
 
   // --- Responsive Reset on Resize ---
 
