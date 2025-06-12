@@ -457,7 +457,7 @@ a {
     font-family: inherit;
     cursor: pointer;
     transition: background-color 0.2s ease;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
 }
@@ -489,7 +489,8 @@ a {
     transform: scaleY(0);
     transform-origin: top;
     transition: opacity 0.2s ease, transform 0.2s ease;
-    display: block;
+    display: flex;
+    align-items: center;
 }
 
 .suggest-input-container.open {
