@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Configuration and Constants ---
   const MODEL_INFO = {
     // Stores information about the model, currently only height.
-    mouse: { height: 'Not Jon Osmond' },
+    mouse: { height: 'not Jon Osmond' },
   };
 
   // --- State Variables ---
