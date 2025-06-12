@@ -406,10 +406,25 @@ a {
     font-family: inherit;
     transition: background-color 0.2s ease;
     text-decoration: none;
+    display: inline-flex;
+    align-items: center;
 }
 
 #suggest-link:hover {
     background-color: var(--color-link-hover);
+}
+
+#suggest-link .toggle-icon {
+    width: 1em;
+    height: 1em;
+    margin-left: 0.3rem;
+    transition: transform 0.3s ease;
+    stroke: currentColor;
+    fill: none;
+}
+
+#suggest-link.open .toggle-icon {
+    transform: rotate(180deg);
 }
 
 #suggest-input {
