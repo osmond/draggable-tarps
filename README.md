@@ -9,6 +9,16 @@ This project powers [jonosmond.com](https://jonosmond.com), showcasing AI genera
 
 All JavaScript is written in vanilla ES modules.
 
+## Testing
+
+This project expects **Node.js 20**. Install dependencies before running the
+tests:
+
+```bash
+npm install
+npm test
+```
+
 
 ## License
 
