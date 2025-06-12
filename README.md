@@ -4,11 +4,13 @@ This project powers [jonosmond.com](https://jonosmond.com), showcasing AI genera
 
 ## Development
 
-1. Install dependencies with `npm install`. There are currently no external
-   packages, but this step prepares the project for future additions.
+1. Install dependencies with `npm install` (requires a local installation of
+   Node.js and npm for offline use).
 2. Run the test suite with `npm test`.
-3. Launch the site with `npm start`, which runs a lightweight static server,
-   and open the served `index.html` in your browser.
+3. Launch the site with `npm start`. This runs the locally installed `serve`
+   package, which starts a lightweight static server on
+   [http://localhost:3000](http://localhost:3000) by default. Open the served
+   `index.html` in your browser.
 
 All JavaScript is written in vanilla ES modules.
 
