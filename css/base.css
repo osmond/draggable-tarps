@@ -453,6 +453,7 @@ a {
     position: absolute;
     top: 1rem;
     right: 1rem;
+    z-index: 1010;
     text-align: right;
     color: #000;
     font-family: ui-monospace, monospace;
