@@ -11,7 +11,7 @@
   --color-text: #f2f2f2;      /* light text for contrast */
   /* Soft light blue background */
   /* Slightly darker but cheerful blue background */
-  --color-bg: #b3e5ff;
+  --color-bg: hsl(354.1deg 100% 85.1% / 24%);
 
   --color-link: #000;
   --color-link-hover: #333;
