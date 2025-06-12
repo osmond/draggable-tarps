@@ -8,18 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const shirts = document.querySelectorAll('.shirt'); // Select all elements with the class 'shirt' (product images)
   const centerImage = document.getElementById('centerImage'); // Select the main display image element
   const infoTooltip = document.getElementById('info-tooltip'); // Select the tooltip element
-  const suggestionForm = document.getElementById('suggestion-form');
-  if (suggestionForm) {
-    suggestionForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const input = suggestionForm.querySelector('input[name="suggestion"]');
-      const value = input ? input.value.trim() : '';
-      if (value) {
-        console.log('Suggestion:', value);
-      }
-      if (input) input.value = '';
-    });
-  }
 
   // --- Configuration and Constants ---
   const MODEL_INFO = {
