@@ -114,20 +114,11 @@ a {
   grid-column-gap: 2rem;
   pointer-events: none;
   justify-items: start;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto;
   grid-template-areas:
     'title'
-    'back'
-    'archive'
     'github'
-    'demos'
-    'tags'
-    'sponsor';
-
-  #cdawrap {
-    justify-self: start;
-    grid-area: sponsor;
-  }
+    'tags';
 
   a,
   button {
@@ -141,62 +132,14 @@ a {
     color: #333;
   }
 
-  .frame__back {
-    grid-area: back;
-    justify-self: start;
-  }
-
-  .frame__archive {
-    grid-area: archive;
-    justify-self: start;
-  }
-
   .frame__social {
     grid-area: github;
     display: flex;
     gap: 1rem;
   }
 
-  .frame__back,
-  .frame__archive,
-  .frame__github {
-    text-decoration: none;
-  }
-
-  .frame__back:hover,
-  .frame__archive:hover,
-  .frame__github:hover {
-    text-decoration: none;
-  }
-
-  .frame__back::after,
-  .frame__archive::after,
-  .frame__github::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 1px;
-    bottom: -3px;
-    left: 0;
-    background-color: var(--color-link-hover);
-    transition: width 0.3s ease-in-out;
-  }
-
-  .frame__back:hover::after,
-  .frame__archive:hover::after,
-  .frame__github:hover::after {
-    width: 100%;
-  }
-
   .frame__tags {
     grid-area: tags;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
-  .frame__demos {
-    grid-area: demos;
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
@@ -209,23 +152,17 @@ a {
     top: 0;
     left: 0;
     width: 100%;
-    grid-template-columns: auto auto auto auto 1fr;
+    grid-template-columns: auto auto 1fr;
     grid-template-rows: auto auto;
     align-content: space-between;
     grid-template-areas:
-      'title back github archive demos'
-      'tags tags tags sponsor sponsor';
+      'title github github'
+      'tags tags tags';
 
     .frame__tags {
       align-self: end;
     }
 
-    .frame__demos,
-    #cdawrap {
-      justify-self: end;
-      text-align: right;
-      max-width: 300px;
-    }
   }
 }
 
