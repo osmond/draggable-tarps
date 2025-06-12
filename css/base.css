@@ -339,6 +339,7 @@ a {
 .top-left { top: 20%; left: 15%; }
 .middle-right { top: 45%; left: 80%; }
 .bottom-left { top: 70%; left: 15%; }
+.bottom-right { top: 70%; left: 80%; }
 
 
 /* Tooltip for Model Info */
@@ -414,6 +415,7 @@ a {
     .top-left { top: 25%; left: 5%; }
     .middle-right { top: 40%; left: 75%; }
     .bottom-left { top: 50%; left: 5%; }
+    .bottom-right { top: 65%; left: 75%; }
 
     .rat-center { /* Styles #centerImage */
         max-width: 70%;
