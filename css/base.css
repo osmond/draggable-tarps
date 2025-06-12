@@ -507,7 +507,9 @@ a {
 
 .suggest-messages {
     position: fixed;
+
     top: 1rem;
+
     left: 0;
     right: 0;
     overflow: hidden;
@@ -524,7 +526,9 @@ a {
     padding: 0.5rem 1rem;
     border-radius: 6px;
     font-family: ui-monospace, monospace;
+
     animation: suggest-scroll 20s linear forwards;
+
 }
 
 @keyframes suggest-scroll {
