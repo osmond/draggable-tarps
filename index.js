@@ -449,7 +449,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (text) {
         const message = document.createElement('div');
         message.className = 'suggest-marquee';
-        message.textContent = `that's a great idea I would love to see him wearing ${text}! Please email me so I don't forget`;
+        message.textContent = `That's a great idea! I would love to see him wearing ${text}! Please email me so I don't forget.`;
         suggestMessagesContainer.appendChild(message);
         message.addEventListener('animationend', () => {
           message.remove();
