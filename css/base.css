@@ -6,9 +6,12 @@
 
 :root {
   font-size: 12px;
-  /* Cheerful, subtle gradient background */
+
+  /* Cheerful, sunny gradient background */
   --color-text: #f2f2f2;      /* light text for contrast */
-  --color-bg: linear-gradient(135deg, #fffbcc 0%, #e8f9ff 100%);
+  --color-bg: linear-gradient(135deg, #fff4b0 0%, #ffcf70 100%);
+
+
   --color-link: #000;
   --color-link-hover: #333;
   --page-padding: 1.5rem;
