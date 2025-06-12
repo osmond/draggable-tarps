@@ -26,7 +26,11 @@
       <button id="suggest-link" type="button">Suggest a shirt</button>
       <div id="suggest-input-container" class="suggest-input-container">
         <input type="text" id="suggest-input" placeholder="Your shirt idea" />
-        <button id="suggest-submit">Submit</button>
+        <button id="suggest-submit" aria-label="Submit">
+          <svg class="submit-arrow" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M2 12h16M12 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
         <div id="suggest-error" class="suggest-error" aria-live="polite"></div>
       </div>
     </div>

@@ -457,10 +457,30 @@ a {
     font-family: inherit;
     cursor: pointer;
     transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #suggest-submit:hover {
     background-color: var(--color-link-hover);
+}
+
+#suggest-submit svg {
+    width: 1em;
+    height: 1em;
+    stroke: currentColor;
+    fill: none;
+    animation: submit-arrow-slide 1s ease-in-out infinite;
+}
+
+@keyframes submit-arrow-slide {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(3px);
+    }
 }
 
 .suggest-input-container {
