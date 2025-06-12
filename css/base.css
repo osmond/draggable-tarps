@@ -470,7 +470,7 @@ a {
     transform: scaleY(0);
     transform-origin: top;
     transition: opacity 0.2s ease, transform 0.2s ease;
-    display: inline-block;
+    display: block;
 }
 
 .suggest-input-container.open {
@@ -480,9 +480,15 @@ a {
 
 #suggestions-list {
     margin-top: 0.5rem;
-    padding-left: 1rem;
+    padding: 0.5rem 1rem;
     list-style-type: disc;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 4px;
     color: #000;
     max-height: 200px;
     overflow-y: auto;
+}
+
+#suggestions-list li {
+    margin-bottom: 0.25rem;
 }
