@@ -10,12 +10,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const infoTooltip = document.getElementById('info-tooltip'); // Select the tooltip element
   const suggestionForm = document.getElementById('suggestion-form');
   if (suggestionForm) {
-    suggestionForm.addEventListener('submit', () => {
+    suggestionForm.addEventListener('submit', (e) => {
+      e.preventDefault();
       const input = suggestionForm.querySelector('input[name="suggestion"]');
       const value = input ? input.value.trim() : '';
       if (value) {
         console.log('Suggestion:', value);
       }
+      if (input) input.value = '';
     });
   }
 
