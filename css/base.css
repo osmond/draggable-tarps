@@ -286,7 +286,7 @@ a {
     -moz-user-select: none;
     -ms-user-select: none;
     -webkit-user-drag: none;
-    filter: drop-shadow(15px 15px 20px rgba(0,0,0,0.25));
+    filter: drop-shadow(10px 10px 12px rgba(0,0,0,0.25));
 }
 
 .shirt {
@@ -296,12 +296,12 @@ a {
     transition: transform 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     transform-origin: center center;
     will-change: transform;
-    filter: drop-shadow(5px 5px 10px rgba(0,0,0,0.1));
+    filter: drop-shadow(3px 3px 6px rgba(0,0,0,0.1));
 }
 
 .shirt.grabbed {
     transform: scale(1.05);
-    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.075));
+    filter: drop-shadow(0 3px 6px rgba(0,0,0,0.075));
 }
 
 .shirt.dragging-right {
@@ -310,7 +310,7 @@ a {
               rotateX(5deg)
               scale(0.92, 0.98) 
               skew(-5deg, 2deg);
-    filter: drop-shadow(5px 5px 15px rgba(0,0,0,0.1));
+    filter: drop-shadow(3px 3px 8px rgba(0,0,0,0.1));
 }
 
 .shirt.dragging-left {
@@ -319,7 +319,7 @@ a {
               rotateX(5deg)
               scale(0.92, 0.98) 
               skew(5deg, -2deg);
-    filter: drop-shadow(-5px 5px 15px rgba(0,0,0,0.1));
+    filter: drop-shadow(-3px 3px 8px rgba(0,0,0,0.1));
 }
 
 .top-left { top: 20%; left: 15%; }
@@ -406,7 +406,7 @@ a {
         top: 45%;
         left: 50%;
         /* transform: translate(-50%, -50%); is inherited */
-        filter: drop-shadow(15px 15px 20px rgba(0,0,0,0.25));
+        filter: drop-shadow(10px 10px 12px rgba(0,0,0,0.25));
     }
 
     #info-tooltip { 
