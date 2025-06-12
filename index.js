@@ -580,7 +580,14 @@ document.addEventListener('DOMContentLoaded', () => {
   updateTooltip();
 
   // --- Suggestion Feature ---
-  if (suggestLink && suggestInputContainer && suggestInput && suggestSubmit && suggestMessagesContainer) {
+  if (
+    suggestLink &&
+    suggestLink.tagName === 'BUTTON' &&
+    suggestInputContainer &&
+    suggestInput &&
+    suggestSubmit &&
+    suggestMessagesContainer
+  ) {
     suggestLink.addEventListener('click', (event) => {
       event.preventDefault();
       suggestInputContainer.classList.toggle('open');
