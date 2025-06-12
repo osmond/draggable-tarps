@@ -7,8 +7,8 @@ This project powers [jonosmond.com](https://jonosmond.com), showcasing AI genera
 1. Install dependencies with `npm install`. There are currently no external
    packages, but this step prepares the project for future additions.
 2. Run the test suite with `npm test`.
-3. Start a static server (e.g. `npx serve`) in the project root and open the
-   served `index.html` in your browser.
+3. Launch the site with `npm start`, which runs a lightweight static server,
+   and open the served `index.html` in your browser.
 
 All JavaScript is written in vanilla ES modules.
 
