@@ -264,6 +264,13 @@ a {
     color: #333;
 }
 
+.suggestion-form {
+    margin: 1rem 0;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
 /* Shirts Area */
 .shirts-container {
     position: relative;

@@ -9,6 +9,11 @@ This project powers [jonosmond.com](https://jonosmond.com), showcasing AI genera
 
 All JavaScript is written in vanilla ES modules.
 
+## Suggest a Shirt
+
+`index.html` now includes a simple form that posts to [Formspree](https://formspree.io/).
+Replace the `action` attribute value in the markup if you have your own Formspree ID.
+
 ## License
 
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
