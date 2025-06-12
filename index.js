@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const suggestInput = document.getElementById('suggest-input');
   const suggestSubmit = document.getElementById('suggest-submit');
   const suggestMessagesContainer = document.getElementById('suggest-messages');
+  const suggestError = document.getElementById('suggest-error');
 
 
   // --- Configuration and Constants ---
@@ -439,6 +440,10 @@ document.addEventListener('DOMContentLoaded', () => {
       event.preventDefault();
       suggestInputContainer.classList.toggle('open');
       if (suggestInputContainer.classList.contains('open')) {
+        if (suggestError) {
+          suggestError.textContent = '';
+          suggestError.classList.remove('visible');
+        }
         suggestInput.focus();
       }
     });
@@ -446,6 +451,29 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleSuggestSubmit(event) {
       event.preventDefault();
       const text = suggestInput.value.trim();
+      let errorMessage = '';
+
+      if (!text) {
+        errorMessage = 'Please enter a shirt idea.';
+      } else if (text.length > 60) {
+        errorMessage = 'Shirt idea must be 60 characters or fewer.';
+      } else if (!/^[a-zA-Z0-9 ,.!?'-]+$/.test(text)) {
+        errorMessage = 'Shirt idea contains invalid characters.';
+      }
+
+      if (errorMessage) {
+        if (suggestError) {
+          suggestError.textContent = errorMessage;
+          suggestError.classList.add('visible');
+        }
+        return;
+      }
+
+      if (suggestError) {
+        suggestError.textContent = '';
+        suggestError.classList.remove('visible');
+      }
+
       if (text) {
         const wrapper = document.createElement('div');
         wrapper.className = 'suggest-marquee';

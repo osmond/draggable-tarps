@@ -473,6 +473,17 @@ a {
     font-family: inherit;
 }
 
+#suggest-error {
+    color: #d00;
+    margin-top: 0.25rem;
+    font-size: 0.9rem;
+    display: none;
+}
+
+#suggest-error.visible {
+    display: block;
+}
+
 #suggest-submit {
     margin-left: 0.5rem;
     padding: 0.3rem 0.75rem;
