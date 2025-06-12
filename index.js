@@ -73,6 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Drag-and-Drop State Variables ---
   let activeShirt = null; // The shirt element currently being dragged.
+  let activePointerId = null; // Pointer ID for the current drag operation.
   let initialShirtPos = { left: '', top: '' }; // Stores the original CSS 'left' and 'top' values of the shirt before dragging.
   let initialTouchPos = { x: 0, y: 0 }; // Stores the initial X and Y coordinates of the mouse/touch when a drag starts.
   let currentPos = { x: 0, y: 0 }; // Stores the current calculated X and Y position of the dragging shirt.
@@ -106,30 +107,27 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Event Listener Setup for Shirts ---
   // Initialize each shirt for drag-and-drop.
   shirts.forEach((shirt) => {
-    shirt.style.cursor = 'grab'; // Set the cursor to 'grab' to indicate draggable items.
-    // Add touch and mouse event listeners for starting the drag.
-    // { passive: false } for touchstart allows us to call e.preventDefault().
+    shirt.style.cursor = 'grab'; // Indicate draggable items
     shirt.addEventListener(
-      'touchstart',
+      'pointerdown',
       (e) => {
         handleStart(e);
       },
       { passive: false }
     );
-    shirt.addEventListener('mousedown', (e) => {
-      handleStart(e);
-    });
   });
 
   // --- Drag-and-Drop Event Handlers ---
 
   /**
-   * Handles the start of a drag operation (mousedown or touchstart).
-   * @param {Event} e - The mouse or touch event.
+   * Handles the start of a drag operation via pointerdown.
+   * @param {PointerEvent} e - The pointer event.
    */
   function handleStart(e) {
     e.preventDefault(); // Prevent default actions like text selection or image dragging.
-    activeShirt = e.target; // Set the currently dragged shirt.
+    activePointerId = e.pointerId;
+    activeShirt = e.currentTarget || e.target; // Set the currently dragged shirt.
+    activeShirt.setPointerCapture(activePointerId);
 
     // Capture the *base* version of the centerImage.src.
     // If centerImage is currently showing a "...model-hover.png",
@@ -178,25 +176,14 @@ document.addEventListener('DOMContentLoaded', () => {
     currentPos.x = parseInt(initialShirtPos.left) || 0;
     currentPos.y = parseInt(initialShirtPos.top) || 0;
 
-    // Record initial mouse/touch coordinates and set up move/end listeners.
-    if (e.type === 'mousedown') {
-      lastX = e.clientX;
-      lastY = e.clientY;
-      initialTouchPos.x = e.clientX;
-      initialTouchPos.y = e.clientY;
-      document.addEventListener('mousemove', handleMove);
-      document.addEventListener('mouseup', handleEnd);
-    } else if (e.type === 'touchstart') {
-      const touch = e.touches[0];
-      lastX = touch.clientX;
-      lastY = touch.clientY;
-      initialTouchPos.x = touch.clientX;
-      initialTouchPos.y = touch.clientY;
-      // { passive: false } for touchmove allows us to call e.preventDefault().
-      document.addEventListener('touchmove', handleMove, { passive: false });
-      document.addEventListener('touchend', handleEnd);
-      document.addEventListener('touchcancel', handleEnd); // Handle unexpected touch interruptions.
-    }
+    // Record initial pointer coordinates and set up move/end listeners.
+    lastX = e.clientX;
+    lastY = e.clientY;
+    initialTouchPos.x = e.clientX;
+    initialTouchPos.y = e.clientY;
+    document.addEventListener('pointermove', handleMove, { passive: false });
+    document.addEventListener('pointerup', handleEnd);
+    document.addEventListener('pointercancel', handleEnd);
 
     // Update shirt appearance for dragging.
     activeShirt.style.cursor = 'grabbing';
@@ -205,23 +192,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /**
-   * Handles the movement during a drag operation (mousemove or touchmove).
-   * @param {Event} e - The mouse or touch event.
+   * Handles the movement during a drag operation (pointermove).
+   * @param {PointerEvent} e - The pointer event.
    */
   function handleMove(e) {
-    if (!activeShirt || !centerImage) return; // Ensure we have an active shirt and a center image.
+    if (!activeShirt || !centerImage || e.pointerId !== activePointerId) return; // Ensure we have the correct pointer
     e.preventDefault(); // Prevent scrolling or other default actions during drag.
-
-    let clientX, clientY;
-    // Get correct coordinates based on event type.
-    if (e.type === 'mousemove') {
-      clientX = e.clientX;
-      clientY = e.clientY;
-    } else if (e.type === 'touchmove') {
-      const touch = e.touches[0];
-      clientX = touch.clientX;
-      clientY = touch.clientY;
-    }
+    let clientX = e.clientX;
+    let clientY = e.clientY;
 
     // Calculate change in position (delta).
     const deltaX = clientX - lastX;
@@ -312,11 +290,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /**
-   * Handles the end of a drag operation (mouseup or touchend).
-   * @param {Event} e - The mouse or touch event.
+   * Handles the end of a drag operation (pointerup).
+   * @param {PointerEvent} e - The pointer event.
    */
   function handleEnd(e) {
-    if (!activeShirt || !centerImage) return; // Ensure active shirt and center image exist.
+    if (!activeShirt || !centerImage || e.pointerId !== activePointerId) return; // Ensure active drag
 
     // --- Collision Detection for Drop ---
     // This uses a more precise check: if the *center* of the dragged shirt is within the centerImage.
@@ -388,11 +366,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (moveTimeout) clearTimeout(moveTimeout); // Clear any pending move timeout.
 
     // Remove event listeners that were added for the drag operation.
-    document.removeEventListener('mousemove', handleMove);
-    document.removeEventListener('mouseup', handleEnd);
-    document.removeEventListener('touchmove', handleMove);
-    document.removeEventListener('touchend', handleEnd);
-    document.removeEventListener('touchcancel', handleEnd);
+    document.removeEventListener('pointermove', handleMove);
+    document.removeEventListener('pointerup', handleEnd);
+    document.removeEventListener('pointercancel', handleEnd);
+    if (activeShirt && activePointerId !== null) {
+      try {
+        activeShirt.releasePointerCapture(activePointerId);
+      } catch (err) {
+        // ignore if release fails
+      }
+    }
+    activePointerId = null;
 
     isHoveringCenterImage = false; // Ensure hover state is reset.
     activeShirt = null; // Clear the active shirt.
