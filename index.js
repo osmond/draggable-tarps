@@ -406,6 +406,14 @@ document.addEventListener('DOMContentLoaded', () => {
       infoTooltip.classList.toggle('tooltip-visible');
     });
 
+    // Allow toggling via keyboard for accessibility
+    infoTooltip.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        infoTooltip.classList.toggle('tooltip-visible');
+      }
+    });
+
     // Hide tooltip if clicked outside of it.
     document.addEventListener('click', (event) => {
       if (infoTooltip.classList.contains('tooltip-visible') && !infoTooltip.contains(event.target)) {
