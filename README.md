@@ -15,6 +15,13 @@ All JavaScript is written in vanilla ES modules.
 The GitHub Actions workflow runs `npm install` and `npm test` on every push and
 pull request to ensure the site continues to build successfully.
 
+## Keyboard Controls
+
+Each shirt image can be focused with the Tab key. Press **Space** or **Enter** to grab the
+focused shirt. While a shirt is grabbed, use the arrow keys to move it around
+the page. Press **Space** or **Enter** again to drop the shirt and, if it is
+over the center image, try it on.
+
 
 ## License
 
