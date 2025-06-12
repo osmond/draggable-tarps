@@ -134,6 +134,7 @@ a {
     grid-area: title;
     font-size: inherit;
     margin: 0;
+    color: #333;
   }
 
   .frame__back {
@@ -254,6 +255,7 @@ a {
     margin: 1rem 0;
     font-family: ui-monospace, monospace;
     text-align: center;
+    color: #333;
 }
 
 /* Shirts Area */
