@@ -1,33 +1,4 @@
-// --- Image Preloading Function ---
-// Preloads an array of image paths to prevent flickering or delays when they are first displayed.
-function preloadImages(imageArray, callback) {
-  let loadedCount = 0;
-  const totalImages = imageArray.length;
-
-  if (totalImages === 0) {
-    callback();
-    return;
-  }
-
-  imageArray.forEach((path) => {
-    const img = new Image();
-    img.onload = () => {
-      loadedCount++;
-      if (loadedCount === totalImages) {
-        callback();
-      }
-    };
-    img.onerror = () => {
-      loadedCount++; // Count errors as "loaded" to not block forever
-      console.warn(`Failed to load image: ${path}`);
-      if (loadedCount === totalImages) {
-        callback();
-      }
-    };
-    img.src = path;
-  });
-}
-// --- End Image Preloading Function ---
+import preloadImages from './js/preload.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   // This event fires when the initial HTML document has been completely loaded and parsed,

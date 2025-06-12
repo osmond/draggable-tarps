@@ -1,0 +1,13 @@
+{
+  "name": "draggable-tarps",
+  "version": "1.0.0",
+  "description": "This project powers [jonosmond.com](https://jonosmond.com), showcasing AI generated images of Jon Osmond wearing various shirts (\"tarps\"). Visitors can drag each shirt onto the center image to preview how it looks.",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT"
+}
