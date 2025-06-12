@@ -450,6 +450,8 @@ document.addEventListener('DOMContentLoaded', () => {
         li.textContent = text;
         suggestionsList.appendChild(li);
         suggestInput.value = '';
+        suggestInputContainer.classList.remove('open');
+        suggestLink.focus();
       }
     }
 
