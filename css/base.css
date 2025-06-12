@@ -458,10 +458,6 @@ a {
     text-align: right;
     color: #000;
     font-family: ui-monospace, monospace;
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 0.75rem;
-    border-radius: 6px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 #suggest-link {
@@ -511,7 +507,9 @@ a {
 
 .suggest-messages {
     position: fixed;
-    bottom: 1rem;
+
+    top: 1rem;
+
     left: 0;
     right: 0;
     overflow: hidden;
@@ -528,7 +526,9 @@ a {
     padding: 0.5rem 1rem;
     border-radius: 6px;
     font-family: ui-monospace, monospace;
-    animation: suggest-scroll 10s linear forwards;
+
+    animation: suggest-scroll 20s linear forwards;
+
 }
 
 @keyframes suggest-scroll {
