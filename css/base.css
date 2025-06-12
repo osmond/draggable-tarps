@@ -452,8 +452,8 @@ a {
 #suggestion-container,
 .suggestion-container {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: 22px;
+    right: 20px;
     z-index: 1010;
     text-align: right;
     color: #000;
