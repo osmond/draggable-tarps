@@ -483,7 +483,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const bird = document.createElement('span');
         bird.className = 'suggest-bird';
-        bird.textContent = '🐦';
+        bird.textContent = '🕺';
 
         const messageText = document.createElement('span');
         messageText.className = 'suggest-text';
