@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- State Variables ---
   let currentMode = 'mouse'; // Intended for future use, perhaps to switch between different model types or interaction modes.
-  const validHoverPaths = []; // Stores absolute URL pathnames for valid hover images (e.g., ".../1ModelHover.png"). Used to ensure we only attempt to load existing hover images.
+  const validHoverPaths = []; // Stores absolute URL pathnames for valid hover images (e.g., ".../white-tshirt-model-hover.png"). Used to ensure we only attempt to load existing hover images.
 
   // --- Image Path Collection and Preloading ---
   // Gather all potential image sources from the HTML to preload them.
@@ -30,8 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (shirtSrc) imagePaths.push(shirtSrc);
     if (mouseSrc) {
       imagePaths.push(mouseSrc);
-      // Derive the hover image path by replacing 'Model.png' with 'ModelHover.png'
-      const hoverSrc = mouseSrc.replace('Model.png', 'ModelHover.png');
+      // Derive the hover image path by replacing 'model.png' with 'model-hover.png'
+      const hoverSrc = mouseSrc.replace('model.png', 'model-hover.png');
       if (hoverSrc !== mouseSrc) {
         // Ensure a replacement actually happened
         imagePaths.push(hoverSrc);
@@ -56,8 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
     .map((path) => {
       if (!path) return null;
       try {
-        // Ensure paths like '1Model.png' correctly resolve to absolute paths for preloading.
-        // And paths like '1ModelHover.png' derived from data attributes are also resolved.
+        // Ensure paths like 'white-tshirt-model.png' correctly resolve to absolute paths for preloading.
+        // And paths like 'white-tshirt-model-hover.png' derived from data attributes are also resolved.
         return new URL(path, window.location.href).href; // Use .href to get the full URL for Image().src
       } catch (e) {
         console.warn('Error converting path to URL for preloading:', path, e);
@@ -132,8 +132,8 @@ document.addEventListener('DOMContentLoaded', () => {
     activeShirt = e.target; // Set the currently dragged shirt.
 
     // Capture the *base* version of the centerImage.src.
-    // If centerImage is currently showing a "...ModelHover.png",
-    // this logic ensures originalCenterImageSrc is set to the corresponding "...Model.png".
+    // If centerImage is currently showing a "...model-hover.png",
+    // this logic ensures originalCenterImageSrc is set to the corresponding "...model.png".
     // This is vital for correctly reverting the image if the drag ends without a drop,
     // or when the dragged shirt moves off the centerImage.
     if (centerImage && centerImage.src) {
@@ -148,8 +148,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       const currentCenterPath = currentCenterSrcURL.pathname;
-      const hoverSuffix = 'ModelHover.png';
-      const baseSuffix = 'Model.png';
+      const hoverSuffix = 'model-hover.png';
+      const baseSuffix = 'model.png';
 
       if (currentCenterPath.endsWith(hoverSuffix)) {
         // If current image is a hover image, derive the base image path.
@@ -247,7 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (collision) {
       // If a collision occurs, try to show the hover image on centerImage.
       const currentDisplaySrcPath = new URL(centerImage.src, window.location.href).pathname;
-      const hoverSuffix = 'ModelHover.png';
+      const hoverSuffix = 'model-hover.png';
       const isAlreadyHovering = currentDisplaySrcPath.endsWith(hoverSuffix);
 
       // Only change to hover image if:
@@ -263,10 +263,10 @@ document.addEventListener('DOMContentLoaded', () => {
           baseImageToHoverPath = ''; // Safety net
         }
 
-        // Ensure the base image is of a type that *can* be hovered (e.g., ends with 'Model.png').
-        if (baseImageToHoverPath.endsWith('Model.png')) {
+        // Ensure the base image is of a type that *can* be hovered (e.g., ends with 'model.png').
+        if (baseImageToHoverPath.endsWith('model.png')) {
           // Construct the potential hover image path for the *original* center image.
-          const potentialHoverPathForOriginal = baseImageToHoverPath.replace('Model.png', hoverSuffix);
+          const potentialHoverPathForOriginal = baseImageToHoverPath.replace('model.png', hoverSuffix);
 
           // Check if this derived hover path is one of the known valid hover images.
           if (validHoverPaths.includes(potentialHoverPathForOriginal)) {
