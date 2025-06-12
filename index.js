@@ -439,6 +439,7 @@ document.addEventListener('DOMContentLoaded', () => {
     suggestLink.addEventListener('click', (event) => {
       event.preventDefault();
       suggestInputContainer.classList.toggle('open');
+      suggestLink.classList.toggle('open');
       if (suggestInputContainer.classList.contains('open')) {
         if (suggestError) {
           suggestError.textContent = '';
@@ -499,6 +500,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         suggestInput.value = '';
         suggestInputContainer.classList.remove('open');
+        suggestLink.classList.remove('open');
         suggestLink.focus();
       }
     }
