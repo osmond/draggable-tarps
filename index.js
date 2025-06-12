@@ -12,16 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const suggestInputContainer = document.getElementById('suggest-input-container');
   const suggestInput = document.getElementById('suggest-input');
   const suggestSubmit = document.getElementById('suggest-submit');
-  const suggestionsList = document.getElementById('suggestions-list');
+  const suggestMessagesContainer = document.getElementById('suggest-messages');
 
-  const STORAGE_KEY = 'suggestionsList';
-
-  const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-  saved.forEach((text) => {
-    const li = document.createElement('li');
-    li.textContent = text;
-    suggestionsList.appendChild(li);
-  });
 
   // --- Configuration and Constants ---
   const MODEL_INFO = {
@@ -442,7 +434,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateTooltip();
 
   // --- Suggestion Feature ---
-  if (suggestLink && suggestInputContainer && suggestInput && suggestSubmit && suggestionsList) {
+  if (suggestLink && suggestInputContainer && suggestInput && suggestSubmit && suggestMessagesContainer) {
     suggestLink.addEventListener('click', (event) => {
       event.preventDefault();
       suggestInputContainer.classList.toggle('open');
@@ -455,11 +447,13 @@ document.addEventListener('DOMContentLoaded', () => {
       event.preventDefault();
       const text = suggestInput.value.trim();
       if (text) {
-        const li = document.createElement('li');
-        li.textContent = text;
-        suggestionsList.appendChild(li);
-        const entries = [...suggestionsList.querySelectorAll('li')].map((li) => li.textContent);
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+        const message = document.createElement('div');
+        message.className = 'suggest-marquee';
+        message.textContent = `that's a great idea I would love to see him wearing ${text}! Please email me so I don't forget`;
+        suggestMessagesContainer.appendChild(message);
+        message.addEventListener('animationend', () => {
+          message.remove();
+        });
         suggestInput.value = '';
         suggestInputContainer.classList.remove('open');
         suggestLink.focus();

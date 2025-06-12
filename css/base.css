@@ -508,18 +508,34 @@ a {
     transform: scaleY(1);
 }
 
-#suggestions-list {
-    margin-top: 0.5rem;
-    padding: 0.5rem 1rem;
-    list-style-type: disc;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 4px;
-    color: #000;
-    max-height: 200px;
-    overflow-y: auto;
-    text-align: left;
+
+.suggest-messages {
+    position: fixed;
+    bottom: 1rem;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1010;
+    text-align: center;
 }
 
-#suggestions-list li {
-    margin-bottom: 0.25rem;
+.suggest-marquee {
+    display: inline-block;
+    white-space: nowrap;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #000;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-family: ui-monospace, monospace;
+    animation: suggest-scroll 10s linear forwards;
+}
+
+@keyframes suggest-scroll {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
 }
