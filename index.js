@@ -1,5 +1,11 @@
 import preloadImages from './js/preload.js';
 
+// Enable debug logging in non-production environments
+const isDev =
+  typeof process !== 'undefined' &&
+  process.env &&
+  process.env.NODE_ENV !== 'production';
+
 document.addEventListener('DOMContentLoaded', () => {
   // This event fires when the initial HTML document has been completely loaded and parsed,
   // without waiting for stylesheets, images, and subframes to finish loading.
@@ -46,7 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
           // Store the absolute pathname of valid hover images for quick lookup.
           validHoverPaths.push(new URL(hoverSrc, window.location.href).pathname);
         } catch (e) {
-          console.warn(`Could not create URL for hover image: ${hoverSrc}`, e);
+          if (isDev) {
+            console.warn(`Could not create URL for hover image: ${hoverSrc}`, e);
+          }
         }
       }
     }
@@ -67,7 +75,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // And paths like 'white-tshirt-model-hover.png' derived from data attributes are also resolved.
         return new URL(path, window.location.href).href; // Use .href to get the full URL for Image().src
       } catch (e) {
-        console.warn('Error converting path to URL for preloading:', path, e);
+        if (isDev) {
+          console.warn('Error converting path to URL for preloading:', path, e);
+        }
         return path;
       }
     })
@@ -75,7 +85,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   preloadImages(uniqueImagePaths, () => {
     document.body.classList.remove('loading');
-    console.log('All images preloaded, loading class removed.');
+    if (isDev) {
+      console.log('All images preloaded, loading class removed.');
+    }
   }); // Preload all collected unique image paths and remove loading class on completion.
 
   // --- Drag-and-Drop State Variables ---
@@ -148,7 +160,12 @@ document.addEventListener('DOMContentLoaded', () => {
       try {
         currentCenterSrcURL = new URL(centerImage.src, window.location.href);
       } catch (urlError) {
-        console.warn('Error parsing centerImage.src in handleStart:', urlError);
+        if (isDev) {
+          console.warn(
+            'Error parsing centerImage.src in handleStart:',
+            urlError
+          );
+        }
         originalCenterImageSrc = centerImage.src; // Fallback
         isHoveringCenterImage = false;
         return;
@@ -164,7 +181,12 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
           originalCenterImageSrc = new URL(basePath, window.location.href).href;
         } catch (normalizationError) {
-          console.warn('Error creating URL for normalized base image in handleStart:', normalizationError);
+          if (isDev) {
+            console.warn(
+              'Error creating URL for normalized base image in handleStart:',
+              normalizationError
+            );
+          }
           originalCenterImageSrc = currentCenterSrcURL.href; // Fallback
         }
       } else {
@@ -266,7 +288,9 @@ document.addEventListener('DOMContentLoaded', () => {
           // Get the pathname of the *original* base image that was on centerImage.
           baseImageToHoverPath = new URL(originalCenterImageSrc, window.location.href).pathname;
         } catch (urlError) {
-          console.warn('Error parsing originalCenterImageSrc in handleMove:', urlError);
+          if (isDev) {
+            console.warn('Error parsing originalCenterImageSrc in handleMove:', urlError);
+          }
           baseImageToHoverPath = ''; // Safety net
         }
 
@@ -351,7 +375,12 @@ document.addEventListener('DOMContentLoaded', () => {
           // This is important so that subsequent hovers over this new image work correctly.
           originalCenterImageSrc = fullPath;
         } catch (urlError) {
-          console.warn(`Error creating URL for new image source: ${newImageSrc}`, urlError);
+          if (isDev) {
+            console.warn(
+              `Error creating URL for new image source: ${newImageSrc}`,
+              urlError
+            );
+          }
           // Fallback to using the raw src if URL parsing fails.
           centerImage.src = newImageSrc;
           originalCenterImageSrc = newImageSrc;
