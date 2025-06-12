@@ -407,7 +407,7 @@ a {
     }
 
     .suggest-input-container {
-        justify-content: flex-start;
+        justify-content: flex-start !important;
     }
 }
 
