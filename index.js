@@ -100,6 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let moveTimeout; // Timeout ID for managing dragging class changes.
   let originalCenterImageSrc = ''; // Stores the full URL of the base image displayed on centerImage *before* any hover effects during a drag. This is crucial for reverting after a hover.
   let isHoveringCenterImage = false; // Flag to track if a dragged shirt is currently hovering over the centerImage and has triggered a hover image change.
+  let keyboardDragging = false; // True when a drag is initiated via keyboard
 
   // --- Helper Functions ---
 
@@ -115,6 +116,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize each shirt for drag-and-drop.
   shirts.forEach((shirt) => {
     shirt.style.cursor = 'grab'; // Set the cursor to 'grab' to indicate draggable items.
+    shirt.tabIndex = 0; // Make shirts focusable for keyboard users
+
     // Add touch and mouse event listeners for starting the drag.
     // { passive: false } for touchstart allows us to call e.preventDefault().
     shirt.addEventListener(
@@ -127,6 +130,9 @@ document.addEventListener('DOMContentLoaded', () => {
     shirt.addEventListener('mousedown', (e) => {
       handleStart(e);
     });
+
+    // Keyboard support
+    shirt.addEventListener('keydown', handleShirtKeydown);
   });
 
   // --- Drag-and-Drop Event Handlers ---
@@ -421,6 +427,127 @@ document.addEventListener('DOMContentLoaded', () => {
 
     isHoveringCenterImage = false; // Ensure hover state is reset.
     activeShirt = null; // Clear the active shirt.
+    keyboardDragging = false;
+  }
+
+  // --- Keyboard Dragging Support ---
+  const KEYBOARD_STEP = 10; // pixels moved per arrow press
+
+  function handleShirtKeydown(event) {
+    if (event.key === ' ' || event.key === 'Enter') {
+      event.preventDefault();
+      if (!keyboardDragging) {
+        startKeyboardDrag(event.currentTarget);
+      } else if (activeShirt === event.currentTarget) {
+        handleEnd();
+      }
+    } else if (keyboardDragging && activeShirt === event.currentTarget) {
+      let moved = false;
+      if (event.key === 'ArrowUp') {
+        currentPos.y -= KEYBOARD_STEP;
+        moved = true;
+      } else if (event.key === 'ArrowDown') {
+        currentPos.y += KEYBOARD_STEP;
+        moved = true;
+      } else if (event.key === 'ArrowLeft') {
+        currentPos.x -= KEYBOARD_STEP;
+        moved = true;
+      } else if (event.key === 'ArrowRight') {
+        currentPos.x += KEYBOARD_STEP;
+        moved = true;
+      }
+
+      if (moved) {
+        event.preventDefault();
+        activeShirt.style.left = `${currentPos.x}px`;
+        activeShirt.style.top = `${currentPos.y}px`;
+        updateHoverState();
+      }
+    }
+  }
+
+  function startKeyboardDrag(target) {
+    activeShirt = target;
+
+    // Capture the base version of the centerImage src as in handleStart
+    if (centerImage && centerImage.src) {
+      let currentCenterSrcURL;
+      try {
+        currentCenterSrcURL = new URL(centerImage.src, window.location.href);
+      } catch {
+        originalCenterImageSrc = centerImage.src;
+        isHoveringCenterImage = false;
+      }
+
+      if (currentCenterSrcURL) {
+        const currentCenterPath = currentCenterSrcURL.pathname;
+        const hoverSuffix = 'model-hover.png';
+        const baseSuffix = 'model.png';
+
+        if (currentCenterPath.endsWith(hoverSuffix)) {
+          const basePath = currentCenterPath.replace(hoverSuffix, baseSuffix);
+          try {
+            originalCenterImageSrc = new URL(basePath, window.location.href).href;
+          } catch {
+            originalCenterImageSrc = currentCenterSrcURL.href;
+          }
+        } else {
+          originalCenterImageSrc = currentCenterSrcURL.href;
+        }
+      }
+    }
+
+    isHoveringCenterImage = false;
+
+    const computedStyle = window.getComputedStyle(activeShirt);
+    initialShirtPos.left = computedStyle.left || '0px';
+    initialShirtPos.top = computedStyle.top || '0px';
+    currentPos.x = parseInt(initialShirtPos.left) || 0;
+    currentPos.y = parseInt(initialShirtPos.top) || 0;
+
+    activeShirt.style.cursor = 'grabbing';
+    activeShirt.style.zIndex = '1000';
+    activeShirt.classList.add('grabbed');
+    keyboardDragging = true;
+  }
+
+  function updateHoverState() {
+    if (!activeShirt || !centerImage) return;
+
+    const shirtRect = activeShirt.getBoundingClientRect();
+    const centerImageRect = centerImage.getBoundingClientRect();
+    const collision = !(
+      shirtRect.right < centerImageRect.left ||
+      shirtRect.left > centerImageRect.right ||
+      shirtRect.bottom < centerImageRect.top ||
+      shirtRect.top > centerImageRect.bottom
+    );
+
+    if (collision) {
+      const currentDisplaySrcPath = new URL(centerImage.src, window.location.href).pathname;
+      const hoverSuffix = 'model-hover.png';
+      const isAlreadyHovering = currentDisplaySrcPath.endsWith(hoverSuffix);
+
+      if (!isAlreadyHovering && originalCenterImageSrc) {
+        let baseImageToHoverPath;
+        try {
+          baseImageToHoverPath = new URL(originalCenterImageSrc, window.location.href).pathname;
+        } catch {
+          baseImageToHoverPath = '';
+        }
+
+        if (baseImageToHoverPath.endsWith('model.png')) {
+          const potentialHoverPathForOriginal = baseImageToHoverPath.replace('model.png', hoverSuffix);
+          if (validHoverPaths.includes(potentialHoverPathForOriginal)) {
+            centerImage.src = potentialHoverPathForOriginal;
+            isHoveringCenterImage = true;
+          }
+        }
+      }
+    } else if (isHoveringCenterImage && originalCenterImageSrc) {
+      centerImage.src = originalCenterImageSrc;
+      isHoveringCenterImage = false;
+    }
   }
 
   // --- Tooltip Interaction ---
