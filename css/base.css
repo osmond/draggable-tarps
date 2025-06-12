@@ -567,15 +567,7 @@ a {
     animation: bird-flap 0.6s ease-in-out infinite;
 }
 
-.suggest-bird::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 50%;
-    width: 1px;
-    height: 20px;
-    background: #000;
-}
+
 
 @keyframes suggest-scroll {
     from {
