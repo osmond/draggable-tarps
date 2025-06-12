@@ -1,4 +1,9 @@
 // Preloads an array of image paths to prevent flickering when they first display
+const isDev =
+  typeof process !== 'undefined' &&
+  process.env &&
+  process.env.NODE_ENV !== 'production';
+
 export default function preloadImages(imageArray, callback) {
   let loadedCount = 0;
   const totalImages = imageArray.length;
@@ -18,7 +23,9 @@ export default function preloadImages(imageArray, callback) {
     };
     img.onerror = () => {
       loadedCount++; // Count errors as loaded
-      console.warn(`Failed to load image: ${path}`);
+      if (isDev) {
+        console.warn(`Failed to load image: ${path}`);
+      }
       if (loadedCount === totalImages) {
         callback();
       }
