@@ -264,6 +264,19 @@ a {
     color: #333;
 }
 
+/* Suggestion form positioned in the top-right corner */
+.suggestion-form {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+.suggestion-form input,
+.suggestion-form button {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+}
+
 /* Shirts Area */
 .shirts-container {
     position: relative;
