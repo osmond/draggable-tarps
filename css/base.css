@@ -28,32 +28,29 @@ body {
 }
 
 @media (scripting: enabled) {
-  .loading {
+  .loading::before,
+  .loading::after {
+    content: '';
+    position: fixed;
+    z-index: 10000;
+  }
 
-    &::before,
-    &::after {
-      content: '';
-      position: fixed;
-      z-index: 10000;
-    }
+  .loading::before {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-bg);
+  }
 
-    &::before {
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--color-bg);
-    }
-
-    &::after {
-      top: 50%;
-      left: 50%;
-      width: 100px;
-      height: 1px;
-      margin: 0 0 0 -50px;
-      background: var(--color-link);
-      animation: loaderAnim 1.5s ease-in-out infinite alternate forwards;
-    }
+  .loading::after {
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 1px;
+    margin: 0 0 0 -50px;
+    background: var(--color-link);
+    animation: loaderAnim 1.5s ease-in-out infinite alternate forwards;
   }
 }
 
@@ -85,38 +82,40 @@ a {
   outline: none;
   cursor: pointer;
   position: relative;
-  /* Underline effect */
-  &::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -2px;
-    width: 0;
-    height: 2px;
-    background: currentColor;
-    transition: width 0.2s ease-in-out;
-  }
+}
 
-  &:hover {
-    color: var(--color-link-hover);
-    &::after {
-      width: 100%;
-    }
-  }
+/* Underline effect */
+a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background: currentColor;
+  transition: width 0.2s ease-in-out;
+}
 
-  &:focus {
-    outline: none;
-    background: lightgrey;
+a:hover {
+  color: var(--color-link-hover);
+}
 
-    &:not(:focus-visible) {
-      background: transparent;
-    }
+a:hover::after {
+  width: 100%;
+}
 
-    &:focus-visible {
-      outline: 2px solid red;
-      background: transparent;
-    }
-  }
+a:focus {
+  outline: none;
+  background: lightgrey;
+}
+
+a:focus:not(:focus-visible) {
+  background: transparent;
+}
+
+a:focus-visible {
+  outline: 2px solid red;
+  background: transparent;
 }
 
 .frame {
@@ -133,33 +132,35 @@ a {
     'title'
     'github'
     'tags';
+}
 
-  a,
-  button {
-    pointer-events: auto;
-  }
+.frame a,
+.frame button {
+  pointer-events: auto;
+}
 
-  .frame__title {
-    grid-area: title;
-    font-size: inherit;
-    margin: 0;
-    color: #333;
-  }
+.frame__title {
+  grid-area: title;
+  font-size: inherit;
+  margin: 0;
+  color: #333;
+}
 
-  .frame__social {
-    grid-area: github;
-    display: flex;
-    gap: 1rem;
-  }
+.frame__social {
+  grid-area: github;
+  display: flex;
+  gap: 1rem;
+}
 
-  .frame__tags {
-    grid-area: tags;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
+.frame__tags {
+  grid-area: tags;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
 
-  @media screen and (min-width: 53em) {
+@media screen and (min-width: 53em) {
+  .frame {
     padding: var(--page-padding);
     height: 100%;
     position: fixed;
@@ -172,11 +173,10 @@ a {
     grid-template-areas:
       'title github github'
       'tags tags tags';
+  }
 
-    .frame__tags {
-      align-self: end;
-    }
-
+  .frame__tags {
+    align-self: end;
   }
 }
 
@@ -186,8 +186,10 @@ a {
   flex-direction: column;
   width: 100vw;
   position: relative;
+}
 
-  @media screen and (min-width: 53em) {
+@media screen and (min-width: 53em) {
+  .content {
     min-height: 100vh;
     justify-content: center;
     align-items: center;
