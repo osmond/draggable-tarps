@@ -349,7 +349,13 @@ document.addEventListener('DOMContentLoaded', () => {
           centerImage.src = newImageSrc;
           originalCenterImageSrc = newImageSrc;
         }
-        // const shirtName = activeShirt.getAttribute('data-shirt-name'); // Potentially for future use.
+
+        // Update the alt text so screen readers reflect the current shirt.
+        const shirtName = activeShirt.getAttribute('data-shirt-name');
+        if (shirtName) {
+          centerImage.alt = `AI-generated Jon Osmond wearing the ${shirtName}`;
+        }
+
         updateTooltip(); // Update tooltip based on the new model/shirt.
 
         // Reset the dragged shirt's position back to its initial spot.
