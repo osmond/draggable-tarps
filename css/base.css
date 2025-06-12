@@ -440,6 +440,7 @@ a {
     margin-top: 0.25rem;
     font-size: 0.9rem;
     display: none;
+    width: 100%;
 }
 
 #suggest-error.visible {
@@ -506,6 +507,7 @@ a {
     transition: opacity 0.2s ease, transform 0.2s ease;
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .suggest-input-container.open {
