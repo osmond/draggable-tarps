@@ -449,7 +449,8 @@ a {
 }
 
 /* Suggestion feature */
-#suggestion-container {
+#suggestion-container,
+.suggestion-container {
     position: absolute;
     top: 1rem;
     right: 1rem;
@@ -457,11 +458,40 @@ a {
     text-align: right;
     color: #000;
     font-family: ui-monospace, monospace;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 0.75rem;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 #suggest-link {
     cursor: pointer;
     text-decoration: underline;
+}
+
+#suggest-input {
+    padding: 0.3rem 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+#suggest-submit {
+    margin-left: 0.5rem;
+    padding: 0.3rem 0.75rem;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--color-link);
+    color: #fff;
+    font-size: 1rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#suggest-submit:hover {
+    background-color: var(--color-link-hover);
 }
 
 .suggest-input-container {
@@ -487,6 +517,7 @@ a {
     color: #000;
     max-height: 200px;
     overflow-y: auto;
+    text-align: left;
 }
 
 #suggestions-list li {
