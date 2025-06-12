@@ -280,24 +280,22 @@ a {
 
 /* Tooltip for Model Info */
 #info-tooltip {
-    position: absolute;
-    top: 25%; 
-    left: 55%; 
-    transform: translate(-50%, -50%); 
-    width: 18px; 
-    height: 18px; 
-    color: rgba(0, 0, 0, 0.6); 
-    border: 1px solid rgba(0, 0, 0, 0.6); 
+    position: relative;
+    width: 18px;
+    height: 18px;
+    margin-left: 0.25rem;
+    color: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(0, 0, 0, 0.6);
     border-radius: 50%;
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
-    font-size: 11px; 
+    font-size: 11px;
     font-weight: bold;
     cursor: help;
-    z-index: 15; 
-    transition: border-color 0.2s ease, color 0.2s ease; 
-    font-family: sans-serif; 
+    z-index: 15;
+    transition: border-color 0.2s ease, color 0.2s ease;
+    font-family: sans-serif;
 }
 
 #info-tooltip:hover {
@@ -363,24 +361,12 @@ a {
 
     }
 
-    #info-tooltip { 
-        top: 25%;
-        left: 65%;
-    }
 
 }
 
 @media (max-width: 377px) {
-    #info-tooltip { 
-        top: 25%;
-        left: 65%;
-    }
 }
 @media (min-width: 378px) and (max-width: 429px) {
-    #info-tooltip {
-        top: 25%;
-        left: 65%;
-    }
 }
 
 /* Suggestion feature */
