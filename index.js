@@ -464,14 +464,17 @@ document.addEventListener('DOMContentLoaded', () => {
       if (errorMessage) {
         if (suggestError) {
           suggestError.textContent = errorMessage;
-          suggestError.classList.add('visible');
+          suggestError.classList.remove('animate');
+          // Trigger reflow to restart animation when class is re-added
+          void suggestError.offsetWidth;
+          suggestError.classList.add('visible', 'animate');
         }
         return;
       }
 
       if (suggestError) {
         suggestError.textContent = '';
-        suggestError.classList.remove('visible');
+        suggestError.classList.remove('visible', 'animate');
       }
 
       if (text) {
