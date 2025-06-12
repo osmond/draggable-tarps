@@ -487,7 +487,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const messageText = document.createElement('span');
         messageText.className = 'suggest-text';
-        messageText.textContent = `That's a great idea! I would love to see him wearing ${text}! Please email me so I don't forget.`;
+        messageText.textContent = `That's a great idea! I would love to see him wearing ${text}!`;
 
         wrapper.appendChild(bird);
         wrapper.appendChild(messageText);
