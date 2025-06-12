@@ -25,6 +25,8 @@ body {
   font-family: ui-monospace, monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Prevent vertical scrolling */
+  overflow-y: hidden;
 }
 
 @media (scripting: enabled) {
