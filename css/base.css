@@ -25,8 +25,7 @@ body {
   font-family: ui-monospace, monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* Prevent vertical scrolling */
-  overflow-y: hidden;
+  overflow-y: auto;
 }
 
 @media (scripting: enabled) {
@@ -248,7 +247,7 @@ a {
 .container {
     position: relative;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
