@@ -14,6 +14,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const suggestSubmit = document.getElementById('suggest-submit');
   const suggestionsList = document.getElementById('suggestions-list');
 
+  const STORAGE_KEY = 'suggestionsList';
+
+  const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  saved.forEach((text) => {
+    const li = document.createElement('li');
+    li.textContent = text;
+    suggestionsList.appendChild(li);
+  });
+
   // --- Configuration and Constants ---
   const MODEL_INFO = {
     // Stores information about the model, currently only height.
@@ -449,6 +458,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const li = document.createElement('li');
         li.textContent = text;
         suggestionsList.appendChild(li);
+        const entries = [...suggestionsList.querySelectorAll('li')].map((li) => li.textContent);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
         suggestInput.value = '';
         suggestInputContainer.classList.remove('open');
         suggestLink.focus();
