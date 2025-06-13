@@ -84,11 +84,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Randomize shirt positions on initial load
   function randomizeShirtPositions() {
+    const placed = [];
+    const MAX_ATTEMPTS = 25;
     shirts.forEach((shirt) => {
-      const left = 10 + Math.random() * 80; // keep away from extreme edges
-      const top = 10 + Math.random() * 80;
-      shirt.style.left = `${left}%`;
-      shirt.style.top = `${top}%`;
+      let attempts = 0;
+      let left;
+      let top;
+      let rect;
+      let overlaps;
+      do {
+        left = 10 + Math.random() * 80; // keep away from extreme edges
+        top = 10 + Math.random() * 80;
+        shirt.style.left = `${left}%`;
+        shirt.style.top = `${top}%`;
+
+        rect = shirt.getBoundingClientRect();
+        overlaps = placed.some((r) => {
+          return !(
+            rect.right < r.left ||
+            rect.left > r.right ||
+            rect.bottom < r.top ||
+            rect.top > r.bottom
+          );
+        });
+
+        attempts += 1;
+      } while (overlaps && attempts < MAX_ATTEMPTS);
+
+      placed.push(shirt.getBoundingClientRect());
     });
   }
 
