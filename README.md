@@ -18,6 +18,9 @@ This project powers [jonosmond.com](https://jonosmond.com), showcasing AI genera
 5. Optionally include another MP3 named `cheese.mp3` in the `assets/` directory.
    It will play whenever the suit shirt is placed on the model.
 
+6. Use the **Mute sound** button in the top corner to toggle audio playback. The
+   preference is saved in your browser.
+
 
 All JavaScript is written in vanilla ES modules.
 
