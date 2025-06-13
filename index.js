@@ -626,6 +626,70 @@ document.addEventListener('DOMContentLoaded', () => {
   updateTooltip();
 
   // --- Suggestion Feature ---
+  const SUGGEST_STORAGE_KEY = 'shirtSuggestions';
+
+  function loadSuggestions() {
+    try {
+      const data = localStorage.getItem(SUGGEST_STORAGE_KEY);
+      return data ? JSON.parse(data) : [];
+    } catch (err) {
+      if (isDev) {
+        console.warn('Failed to load suggestions from storage', err);
+      }
+      return [];
+    }
+  }
+
+  function saveSuggestions(list) {
+    try {
+      localStorage.setItem(SUGGEST_STORAGE_KEY, JSON.stringify(list));
+    } catch (err) {
+      if (isDev) {
+        console.warn('Failed to save suggestions to storage', err);
+      }
+    }
+  }
+
+  function escapeHtml(str) {
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  function displaySuggestion(text, message, allowHTML = false) {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'suggest-marquee';
+
+    const messageText = document.createElement('span');
+    messageText.className = 'suggest-text';
+    const defaultMessage = `That's a great idea! I would love to see him wearing ${escapeHtml(text)}!`;
+    if (allowHTML) {
+      messageText.innerHTML = message || defaultMessage;
+    } else {
+      messageText.textContent = message || defaultMessage;
+    }
+
+    wrapper.appendChild(messageText);
+    suggestMessagesContainer.appendChild(wrapper);
+
+    wrapper.addEventListener('animationend', () => {
+      wrapper.remove();
+    });
+  }
+
+  // Show any previously saved suggestions when the page loads
+  loadSuggestions().forEach((s) => {
+    if (s && s.text) {
+      const msg =
+        `Do you see ${escapeHtml(s.text)}? If not, send me an ` +
+        '<a href="mailto:jonathan.osmond@gmail.com">email</a> and I\'ll be sure to add it!';
+      displaySuggestion(s.text, msg, true);
+    }
+  });
+
   if (suggestLink && suggestInputContainer && suggestInput && suggestSubmit && suggestMessagesContainer) {
     suggestLink.addEventListener('click', (event) => {
       event.preventDefault();
@@ -670,24 +734,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       if (text) {
-        const wrapper = document.createElement('div');
-        wrapper.className = 'suggest-marquee';
+        displaySuggestion(text);
 
-        const bird = document.createElement('span');
-        bird.className = 'suggest-bird';
-        bird.textContent = '🕺';
-
-        const messageText = document.createElement('span');
-        messageText.className = 'suggest-text';
-        messageText.textContent = `That's a great idea! I would love to see him wearing ${text}!`;
-
-        wrapper.appendChild(bird);
-        wrapper.appendChild(messageText);
-        suggestMessagesContainer.appendChild(wrapper);
-
-        wrapper.addEventListener('animationend', () => {
-          wrapper.remove();
-        });
+        const stored = loadSuggestions();
+        stored.push({ text, time: Date.now() });
+        saveSuggestions(stored);
 
         suggestInput.value = '';
         suggestInputContainer.classList.remove('open');
