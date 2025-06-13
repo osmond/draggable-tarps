@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const suggestSubmit = document.getElementById('suggest-submit');
   const suggestMessagesContainer = document.getElementById('suggest-messages');
   const suggestError = document.getElementById('suggest-error');
+  const shuffleButton = document.getElementById('shuffle-button');
 
 
   // --- Configuration and Constants ---
@@ -134,6 +135,12 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('All images preloaded, loading class removed.');
     }
   }); // Preload all collected unique image paths and remove loading class on completion.
+
+  if (shuffleButton) {
+    shuffleButton.addEventListener('click', () => {
+      randomizeShirtPositions();
+    });
+  }
 
   // --- Drag-and-Drop State Variables ---
   let activeShirt = null; // The shirt element currently being dragged.
