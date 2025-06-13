@@ -6,3 +6,6 @@ node_modules/
 
 # Build artifacts
 /dist/
+# Ignore SFTP config files
+.vscode/sftp.json
+sftp.json
