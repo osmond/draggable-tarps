@@ -9,3 +9,4 @@ node_modules/
 # Ignore SFTP config files
 .vscode/sftp.json
 sftp.json
+tarps.code-workspace
