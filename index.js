@@ -6,10 +6,6 @@ const isDev =
   process.env &&
   process.env.NODE_ENV !== 'production';
 
-if (isDev) {
-  console.log("Hey bud, what's up?");
-}
-
 document.addEventListener('DOMContentLoaded', () => {
   // This event fires when the initial HTML document has been completely loaded and parsed,
   // without waiting for stylesheets, images, and subframes to finish loading.
