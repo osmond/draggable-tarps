@@ -638,11 +638,6 @@ document.addEventListener('DOMContentLoaded', () => {
   function loadSuggestions() {
     try {
       const data = localStorage.getItem(SUGGEST_STORAGE_KEY);
-      return data ? JSON.parse(data) : [];
-    } catch (err) {
-      if (isDev) {
-        console.warn('Failed to load suggestions from storage', err);
-      }
       return [];
     }
   }

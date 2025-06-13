@@ -548,24 +548,6 @@ a:focus-visible {
     margin-top: 0.5rem;
     opacity: 0;
     transform: scaleY(0);
-    transform-origin: top;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-}
-
-.suggest-input-container.open {
-    opacity: 1;
-    transform: scaleY(1);
-}
-
-
-.suggest-messages {
-    position: fixed;
-
-    top: 10%;
 
     left: 0;
     right: 0;
