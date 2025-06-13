@@ -23,18 +23,19 @@
       <p class="instructions">This page requires JavaScript for the drag-and-drop demo.</p>
     </noscript>
     <div id="suggestion-container">
-      <button id="suggest-link" type="button">
-        Suggest a shirt
-        <svg class="toggle-icon" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-      </button>
+        <button id="suggest-link" type="button">
+          Suggest a shirt
+          <svg class="toggle-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
         <button id="shuffle-button" type="button" aria-label="Shuffle shirt positions">Shuffle shirts</button>
-      <div id="suggest-input-container" class="suggest-input-container">
-        <input type="text" id="suggest-input" placeholder="Your shirt idea" />
-        <button id="suggest-submit" aria-label="Submit">
-          <svg class="submit-arrow" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M2 12h16M12 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <button id="clear-suggestions" type="button" aria-label="Clear stored suggestions">Clear suggestions</button>
+        <div id="suggest-input-container" class="suggest-input-container">
+          <input type="text" id="suggest-input" placeholder="Your shirt idea" />
+          <button id="suggest-submit" aria-label="Submit">
+            <svg class="submit-arrow" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M2 12h16M12 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
         </button>
         <div id="suggest-error" class="suggest-error" aria-live="polite"></div>
@@ -62,7 +63,7 @@
           >
 
         </div>
-      
+
         <nav class="frame__tags">
           <a href="#">#draggable tarps</a>
         </nav>
@@ -117,7 +118,7 @@
           <span id="info-tooltip" aria-label="Model information" tabindex="0" data-tooltip="This is not Jon Osmond">?</span>
         </p>
     </main>
-  
+
     <audio id="first-drop-audio" preload="auto">
       <source src="assets/first-drop.mp3" type="audio/mpeg" />
     </audio>

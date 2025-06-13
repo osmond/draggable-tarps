@@ -462,11 +462,30 @@ a:focus-visible {
     align-items: center;
 }
 
+#clear-suggestions {
+    cursor: pointer;
+    padding: 0.3rem 0.75rem;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--color-link);
+    color: #fff;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: background-color 0.2s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+
 #suggest-link:hover {
     background-color: var(--color-link-hover);
 }
 
 #shuffle-button:hover {
+    background-color: var(--color-link-hover);
+}
+
+#clear-suggestions:hover {
     background-color: var(--color-link-hover);
 }
 

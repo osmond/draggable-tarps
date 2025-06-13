@@ -21,9 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const suggestMessagesContainer = document.getElementById('suggest-messages');
   const suggestError = document.getElementById('suggest-error');
   const shuffleButton = document.getElementById('shuffle-button');
+  const clearSuggestionsButton = document.getElementById('clear-suggestions');
   const firstDropAudio = document.getElementById('first-drop-audio');
 
   const suitCheeseAudio = document.getElementById('suit-cheese-audio');
+  const SUGGEST_STORAGE_KEY = "shirtSuggestions";
 
   function playAudioExclusive(audioElement) {
     if (!audioElement) return;
@@ -160,6 +162,24 @@ document.addEventListener('DOMContentLoaded', () => {
   if (shuffleButton) {
     shuffleButton.addEventListener('click', () => {
       randomizeShirtPositions();
+    });
+  }
+
+  if (clearSuggestionsButton) {
+    clearSuggestionsButton.addEventListener('click', () => {
+      try {
+        localStorage.removeItem(SUGGEST_STORAGE_KEY);
+      } catch (err) {
+        if (isDev) {
+          console.warn('Failed to clear suggestions from storage', err);
+        }
+      }
+
+      if (suggestMessagesContainer) {
+        while (suggestMessagesContainer.firstChild) {
+          suggestMessagesContainer.removeChild(suggestMessagesContainer.firstChild);
+        }
+      }
     });
   }
 
@@ -674,7 +694,6 @@ document.addEventListener('DOMContentLoaded', () => {
   updateTooltip();
 
   // --- Suggestion Feature ---
-  const SUGGEST_STORAGE_KEY = 'shirtSuggestions';
 
   function loadSuggestions() {
     try {

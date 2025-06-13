@@ -34,3 +34,16 @@ test('keyboard dragging moves shirt onto model', async ({ page }) => {
   await page.keyboard.press('Enter');
   await expect(center).toHaveAttribute('src', /mn-wild-jersey-model\.png$/);
 });
+
+test('clear suggestions button removes stored suggestions and messages', async ({ page }) => {
+  await page.evaluate(() => {
+    localStorage.setItem('shirtSuggestions', JSON.stringify([{ text: 'test', time: Date.now() }]));
+  });
+  await page.reload();
+  const msgSelector = '.suggest-marquee';
+  await expect(page.locator(msgSelector)).toHaveCount(1);
+  await page.click('#clear-suggestions');
+  const stored = await page.evaluate(() => localStorage.getItem('shirtSuggestions'));
+  expect(stored).toBeNull();
+  await expect(page.locator(msgSelector)).toHaveCount(0);
+});
