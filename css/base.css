@@ -298,7 +298,6 @@ a:focus-visible {
 .middle-right { top: 45%; left: 80%; }
 .bottom-left { top: 70%; left: 15%; }
 .bottom-right { top: 70%; left: 80%; }
-  .top-right { top: 20%; left: 80%; }
 
 
 /* Tooltip for Model Info */
@@ -371,7 +370,6 @@ a:focus-visible {
 
     .top-left { top: 25%; left: 5%; }
     .middle-right { top: 40%; left: 75%; }
-    .top-right { top: 25%; left: 75%; }
     .bottom-left { top: 50%; left: 5%; }
     .bottom-right { top: 50%; left: 75%; }
 
