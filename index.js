@@ -21,6 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const suggestMessagesContainer = document.getElementById('suggest-messages');
   const suggestError = document.getElementById('suggest-error');
   const shuffleButton = document.getElementById('shuffle-button');
+  const firstDropAudio = document.getElementById('first-drop-audio');
+  const suitCheeseAudio = document.getElementById('suit-cheese-audio');
 
 
   // --- Configuration and Constants ---
@@ -31,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- State Variables ---
   const validHoverPaths = []; // Stores absolute URL pathnames for valid hover images (e.g., ".../white-tshirt-model-hover.png"). Used to ensure we only attempt to load existing hover images.
+  let hasPlayedFirstDrop = false;
 
   // --- Image Path Collection and Preloading ---
   // Gather all potential image sources from the HTML to preload them.
@@ -450,6 +453,19 @@ document.addEventListener('DOMContentLoaded', () => {
         );
 
         updateTooltip(); // Update tooltip based on the new model/shirt.
+
+        if (shirtName === 'suit' && suitCheeseAudio) {
+          try {
+            suitCheeseAudio.play();
+          } catch (e) {}
+        }
+
+        if (!hasPlayedFirstDrop && firstDropAudio) {
+          try {
+            firstDropAudio.play();
+          } catch (e) {}
+          hasPlayedFirstDrop = true;
+        }
 
         // Reset the dragged shirt's position back to its initial spot.
         activeShirt.style.left = initialShirtPos.left;

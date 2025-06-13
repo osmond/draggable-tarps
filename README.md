@@ -11,6 +11,11 @@ This project powers [jonosmond.com](https://jonosmond.com), showcasing AI genera
    package, which starts a lightweight static server on
    [http://localhost:3000](http://localhost:3000) by default. Open the served
    `index.html` in your browser.
+4. Optionally add a sound effect by placing an MP3 named `first-drop.mp3` in the
+   `assets/` directory. It will play the first time a shirt is placed on the
+   model during a session.
+5. Optionally include another MP3 named `cheese.mp3` in the `assets/` directory.
+   It will play whenever the suit shirt is placed on the model.
 
 All JavaScript is written in vanilla ES modules.
 
