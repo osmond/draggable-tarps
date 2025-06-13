@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const suggestError = document.getElementById('suggest-error');
   const shuffleButton = document.getElementById('shuffle-button');
   const firstDropAudio = document.getElementById('first-drop-audio');
+  const suitCheeseAudio = document.getElementById('suit-cheese-audio');
 
 
   // --- Configuration and Constants ---
@@ -452,6 +453,12 @@ document.addEventListener('DOMContentLoaded', () => {
         );
 
         updateTooltip(); // Update tooltip based on the new model/shirt.
+
+        if (shirtName === 'suit' && suitCheeseAudio) {
+          try {
+            suitCheeseAudio.play();
+          } catch (e) {}
+        }
 
         if (!hasPlayedFirstDrop && firstDropAudio) {
           try {
