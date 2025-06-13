@@ -440,6 +440,15 @@ document.addEventListener('DOMContentLoaded', () => {
           centerImage.alt = `AI-generated Jon Osmond wearing the ${shirtName}`;
         }
 
+        centerImage.classList.add('change-effect');
+        centerImage.addEventListener(
+          'animationend',
+          () => {
+            centerImage.classList.remove('change-effect');
+          },
+          { once: true }
+        );
+
         updateTooltip(); // Update tooltip based on the new model/shirt.
 
         // Reset the dragged shirt's position back to its initial spot.
