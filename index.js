@@ -82,8 +82,19 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .filter(Boolean);
 
+  // Randomize shirt positions on initial load
+  function randomizeShirtPositions() {
+    shirts.forEach((shirt) => {
+      const left = 10 + Math.random() * 80; // keep away from extreme edges
+      const top = 10 + Math.random() * 80;
+      shirt.style.left = `${left}%`;
+      shirt.style.top = `${top}%`;
+    });
+  }
+
   preloadImages(uniqueImagePaths, () => {
     document.body.classList.remove('loading');
+    randomizeShirtPositions();
     if (isDev) {
       console.log('All images preloaded, loading class removed.');
     }
