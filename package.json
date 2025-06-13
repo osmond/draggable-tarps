@@ -5,11 +5,12 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "node test/test.js",
+    "test": "playwright test",
     "start": "npx serve -s ."
   },
   "devDependencies": {
-    "serve": "^14.2.0"
+    "serve": "^14.2.0",
+    "@playwright/test": "^1.41.2"
   },
   "keywords": [],
   "author": "",
