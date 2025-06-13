@@ -592,12 +592,30 @@ a:focus-visible {
     font-family: ui-monospace, monospace;
 }
 
+.suggest-bird {
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+    position: relative;
+    animation: bird-flap 0.6s ease-in-out infinite;
+}
+
+
+
 @keyframes suggest-scroll {
     from {
         transform: translateX(100%);
     }
     to {
         transform: translateX(-100%);
+    }
+}
+
+@keyframes bird-flap {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-4px);
     }
 }
 
