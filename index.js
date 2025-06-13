@@ -671,6 +671,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const wrapper = document.createElement('div');
     wrapper.className = 'suggest-marquee';
 
+    // Randomize position so multiple messages don't overlap in a single row
+    // Position is fixed so it remains relative to the viewport
+    wrapper.style.position = 'fixed';
+    wrapper.style.top = `${10 + Math.random() * 80}%`;
+    wrapper.style.left = `${5 + Math.random() * 90}%`;
+
     const messageText = document.createElement('span');
     messageText.className = 'suggest-text';
 
