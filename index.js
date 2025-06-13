@@ -25,6 +25,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const suitCheeseAudio = document.getElementById('suit-cheese-audio');
 
+  function playAudioExclusive(audioElement) {
+    if (!audioElement) return;
+    const audios = [firstDropAudio, suitCheeseAudio];
+    audios.forEach((aud) => {
+      if (aud && aud !== audioElement) {
+        aud.pause();
+        try {
+          aud.currentTime = 0;
+        } catch (e) {}
+      }
+    });
+    try {
+      audioElement.play();
+    } catch (e) {}
+  }
+
 
 
   // --- Configuration and Constants ---
@@ -458,16 +474,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         if (shirtName === 'suit' && suitCheeseAudio) {
-          try {
-            suitCheeseAudio.play();
-          } catch (e) {}
+          playAudioExclusive(suitCheeseAudio);
         }
 
 
         if (!hasPlayedFirstDrop && firstDropAudio) {
-          try {
-            firstDropAudio.play();
-          } catch (e) {}
+          playAudioExclusive(firstDropAudio);
           hasPlayedFirstDrop = true;
         }
 
