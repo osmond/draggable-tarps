@@ -601,3 +601,19 @@ a:focus-visible {
     }
 }
 
+.rat-center.change-effect {
+    animation: change-bounce 0.3s ease-out;
+}
+
+@keyframes change-bounce {
+    0% {
+        transform: translate(-50%, -50%) scale(0.95);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.05);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
