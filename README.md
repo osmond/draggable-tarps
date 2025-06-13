@@ -15,10 +15,6 @@ This project powers [jonosmond.com](https://jonosmond.com), showcasing AI genera
    `assets/` directory. It will play the first time a shirt is placed on the
    model during a session.
 
-5. Optionally include another MP3 named `cheese.mp3` in the `assets/` directory.
-   It will play whenever the suit shirt is placed on the model.
-
-
 All JavaScript is written in vanilla ES modules.
 
 The GitHub Actions workflow runs `npm install` and `npm test` on every push and
