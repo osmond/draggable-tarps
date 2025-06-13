@@ -86,6 +86,8 @@ document.addEventListener('DOMContentLoaded', () => {
   function randomizeShirtPositions() {
     const placed = [];
     const MAX_ATTEMPTS = 25;
+    // Capture the bounding rect of the model image so we can avoid it
+    const centerRect = centerImage ? centerImage.getBoundingClientRect() : null;
     shirts.forEach((shirt) => {
       let attempts = 0;
       let left;
@@ -107,6 +109,16 @@ document.addEventListener('DOMContentLoaded', () => {
             rect.top > r.bottom
           );
         });
+
+        // Also check overlap with the model in the center
+        if (!overlaps && centerRect) {
+          overlaps = !(
+            rect.right < centerRect.left ||
+            rect.left > centerRect.right ||
+            rect.bottom < centerRect.top ||
+            rect.top > centerRect.bottom
+          );
+        }
 
         attempts += 1;
       } while (overlaps && attempts < MAX_ATTEMPTS);
