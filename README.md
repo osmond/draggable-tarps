@@ -24,6 +24,14 @@ focused shirt. While a shirt is grabbed, use the arrow keys to move it around
 the page. Press **Space** or **Enter** again to drop the shirt and, if it is
 over the center image, try it on.
 
+## Suggesting Shirts
+
+Click the **Suggest a shirt** button in the top corner to share ideas for new designs.
+Suggestions are saved in your browser's local storage so they appear again the next
+time you visit the page. When they reappear you'll see a message like
+"Do you see <your shirt idea>? If not, send me an [email](mailto:jonathan.osmond@gmail.com) and I'll be sure to add it!"
+prompting you to contact me if your idea hasn't been added yet.
+
 
 ## License
 
