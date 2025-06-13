@@ -21,12 +21,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const suggestMessagesContainer = document.getElementById('suggest-messages');
   const suggestError = document.getElementById('suggest-error');
   const shuffleButton = document.getElementById('shuffle-button');
+  const muteToggle = document.getElementById('mute-toggle');
   const firstDropAudio = document.getElementById('first-drop-audio');
 
   const suitCheeseAudio = document.getElementById('suit-cheese-audio');
 
   function playAudioExclusive(audioElement) {
-    if (!audioElement) return;
+    if (!audioElement || isMuted) return;
     const audios = [firstDropAudio, suitCheeseAudio];
     audios.forEach((aud) => {
       if (aud && aud !== audioElement) {
@@ -52,6 +53,36 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- State Variables ---
   const validHoverPaths = []; // Stores absolute URL pathnames for valid hover images (e.g., ".../white-tshirt-model-hover.png"). Used to ensure we only attempt to load existing hover images.
   let hasPlayedFirstDrop = false;
+  const MUTE_STORAGE_KEY = 'muteSound';
+  let isMuted = false;
+
+  function loadMuteSetting() {
+    try {
+      return localStorage.getItem(MUTE_STORAGE_KEY) === 'true';
+    } catch (err) {
+      if (isDev) {
+        console.warn('Failed to load mute preference', err);
+      }
+      return false;
+    }
+  }
+
+  function saveMuteSetting(val) {
+    try {
+      localStorage.setItem(MUTE_STORAGE_KEY, val ? 'true' : 'false');
+    } catch (err) {
+      if (isDev) {
+        console.warn('Failed to save mute preference', err);
+      }
+    }
+  }
+
+  function updateMuteToggle() {
+    if (muteToggle) {
+      muteToggle.textContent = isMuted ? 'Unmute sound' : 'Mute sound';
+      muteToggle.setAttribute('aria-pressed', String(isMuted));
+    }
+  }
 
   // --- Image Path Collection and Preloading ---
   // Gather all potential image sources from the HTML to preload them.
@@ -146,6 +177,16 @@ document.addEventListener('DOMContentLoaded', () => {
       } while (overlaps && attempts < MAX_ATTEMPTS);
 
       placed.push(shirt.getBoundingClientRect());
+    });
+  }
+
+  isMuted = loadMuteSetting();
+  updateMuteToggle();
+  if (muteToggle) {
+    muteToggle.addEventListener('click', () => {
+      isMuted = !isMuted;
+      saveMuteSetting(isMuted);
+      updateMuteToggle();
     });
   }
 
