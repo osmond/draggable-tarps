@@ -671,12 +671,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const wrapper = document.createElement('div');
     wrapper.className = 'suggest-marquee';
 
+    const messageText = document.createElement('span');
+    messageText.className = 'suggest-text';
+
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'suggest-marquee';
+
     const bird = document.createElement('span');
     bird.className = 'suggest-bird';
     bird.textContent = '🕺';
 
     const messageText = document.createElement('span');
     messageText.className = 'suggest-text';
+
 
     const defaultMessage = `That's a great idea! I would love to see him wearing ${escapeHtml(text)}!`;
     if (allowHTML) {
@@ -686,7 +694,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
+
     wrapper.appendChild(bird);
+
     wrapper.appendChild(messageText);
     suggestMessagesContainer.appendChild(wrapper);
 
