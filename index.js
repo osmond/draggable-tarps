@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const suggestSubmit = document.getElementById('suggest-submit');
   const suggestMessagesContainer = document.getElementById('suggest-messages');
   const suggestError = document.getElementById('suggest-error');
+  const shuffleButton = document.getElementById('shuffle-button');
 
 
   // --- Configuration and Constants ---
@@ -134,6 +135,12 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('All images preloaded, loading class removed.');
     }
   }); // Preload all collected unique image paths and remove loading class on completion.
+
+  if (shuffleButton) {
+    shuffleButton.addEventListener('click', () => {
+      randomizeShirtPositions();
+    });
+  }
 
   // --- Drag-and-Drop State Variables ---
   let activeShirt = null; // The shirt element currently being dragged.
@@ -660,17 +667,35 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function displaySuggestion(text, message, allowHTML = false) {
+
     const wrapper = document.createElement('div');
     wrapper.className = 'suggest-marquee';
 
     const messageText = document.createElement('span');
     messageText.className = 'suggest-text';
+
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'suggest-marquee';
+
+    const bird = document.createElement('span');
+    bird.className = 'suggest-bird';
+    bird.textContent = '🕺';
+
+    const messageText = document.createElement('span');
+    messageText.className = 'suggest-text';
+
+
     const defaultMessage = `That's a great idea! I would love to see him wearing ${escapeHtml(text)}!`;
     if (allowHTML) {
       messageText.innerHTML = message || defaultMessage;
     } else {
       messageText.textContent = message || defaultMessage;
     }
+
+
+
+    wrapper.appendChild(bird);
 
     wrapper.appendChild(messageText);
     suggestMessagesContainer.appendChild(wrapper);
@@ -683,10 +708,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // Show any previously saved suggestions when the page loads
   loadSuggestions().forEach((s) => {
     if (s && s.text) {
+
       const msg =
         `Do you see ${escapeHtml(s.text)}? If not, send me an ` +
         '<a href="mailto:jonathan.osmond@gmail.com">email</a> and I\'ll be sure to add it!';
       displaySuggestion(s.text, msg, true);
+
     }
   });
 
