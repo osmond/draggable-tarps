@@ -48,29 +48,40 @@ body {
     height: 1px;
     margin: 0 0 0 -50px;
     background: var(--color-link);
-    animation: loaderAnim 1.5s ease-in-out infinite alternate forwards;
-  }
-}
-
-@keyframes loaderAnim {
-  0% {
-    transform: scaleX(0);
-    transform-origin: 0% 50%;
   }
 
-  50% {
-    transform: scaleX(1);
-    transform-origin: 0% 50%;
+  @media (prefers-reduced-motion: no-preference) {
+    .loading::after {
+      animation: loaderAnim 1.5s ease-in-out infinite alternate forwards;
+    }
+
+    @keyframes loaderAnim {
+      0% {
+        transform: scaleX(0);
+        transform-origin: 0% 50%;
+      }
+
+      50% {
+        transform: scaleX(1);
+        transform-origin: 0% 50%;
+      }
+
+      50.1% {
+        transform: scaleX(1);
+        transform-origin: 100% 50%;
+      }
+
+      100% {
+        transform: scaleX(0);
+        transform-origin: 100% 50%;
+      }
+    }
   }
 
-  50.1% {
-    transform: scaleX(1);
-    transform-origin: 100% 50%;
-  }
-
-  100% {
-    transform: scaleX(0);
-    transform-origin: 100% 50%;
+  @media (prefers-reduced-motion: reduce) {
+    .loading::after {
+      animation: none;
+    }
   }
 }
 
@@ -493,17 +504,28 @@ a:focus-visible {
 }
 
 #suggest-error.animate {
-    animation: suggest-error-slide 0.3s ease-out;
 }
 
-@keyframes suggest-error-slide {
-    from {
-        opacity: 0;
-        transform: translateY(-5px);
+@media (prefers-reduced-motion: no-preference) {
+    #suggest-error.animate {
+        animation: suggest-error-slide 0.3s ease-out;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+
+    @keyframes suggest-error-slide {
+        from {
+            opacity: 0;
+            transform: translateY(-5px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #suggest-error.animate {
+        animation: none;
     }
 }
 
@@ -532,15 +554,26 @@ a:focus-visible {
     height: 1em;
     stroke: currentColor;
     fill: none;
-    animation: submit-arrow-slide 1s ease-in-out infinite;
 }
 
-@keyframes submit-arrow-slide {
-    0%, 100% {
-        transform: translateX(0);
+@media (prefers-reduced-motion: no-preference) {
+    #suggest-submit svg {
+        animation: submit-arrow-slide 1s ease-in-out infinite;
     }
-    50% {
-        transform: translateX(3px);
+
+    @keyframes submit-arrow-slide {
+        0%, 100% {
+            transform: translateX(0);
+        }
+        50% {
+            transform: translateX(3px);
+        }
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #suggest-submit svg {
+        animation: none;
     }
 }
 
@@ -575,13 +608,25 @@ a:focus-visible {
     text-align: center;
 }
 
+
 .suggest-marquee {
     display: inline-flex;
     align-items: flex-end;
     white-space: nowrap;
-    animation: suggest-scroll 20s linear forwards;
     position: relative;
     pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .suggest-marquee {
+        animation: suggest-scroll 20s linear forwards;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .suggest-marquee {
+        animation: none;
+    }
 }
 
 .suggest-text {
@@ -601,8 +646,20 @@ a:focus-visible {
     }
 }
 
+
 .rat-center.change-effect {
-    animation: change-bounce 0.3s ease-out;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .rat-center.change-effect {
+        animation: change-bounce 0.3s ease-out;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .rat-center.change-effect {
+        animation: none;
+    }
 }
 
 @keyframes change-bounce {
