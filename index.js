@@ -671,10 +671,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const wrapper = document.createElement('div');
     wrapper.className = 'suggest-marquee';
 
-    const bird = document.createElement('span');
-    bird.className = 'suggest-bird';
-    bird.textContent = '🕺';
-
     const messageText = document.createElement('span');
     messageText.className = 'suggest-text';
 
@@ -686,7 +682,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    wrapper.appendChild(bird);
     wrapper.appendChild(messageText);
     suggestMessagesContainer.appendChild(wrapper);
 
