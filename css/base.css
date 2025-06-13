@@ -579,7 +579,7 @@ a:focus-visible {
     display: inline-flex;
     align-items: flex-end;
     white-space: nowrap;
-    animation: suggest-scroll 35s linear forwards;
+    animation: suggest-scroll 20s linear forwards;
     position: relative;
     pointer-events: auto;
 }
