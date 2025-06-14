@@ -661,6 +661,16 @@ a:focus-visible {
     font-family: ui-monospace, monospace;
 }
 
+.suggest-close {
+    background: transparent;
+    border: none;
+    color: #000;
+    margin-left: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
 @keyframes suggest-scroll {
     from {
         transform: translateX(100%);
