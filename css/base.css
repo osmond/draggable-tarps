@@ -653,22 +653,29 @@ a:focus-visible {
     }
 }
 
+
 .suggest-text {
     background-color: rgba(255, 255, 255, 0.9);
     color: #000;
     padding: 0.5rem 1rem;
     border-radius: 6px;
     font-family: ui-monospace, monospace;
+    display: inline-block;
+    margin-right: 1.5rem;
 }
 
 .suggest-close {
     background: transparent;
     border: none;
     color: #000;
-    margin-left: 0.5rem;
     font-size: 1rem;
     cursor: pointer;
     line-height: 1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+    margin: 0;
 }
 .suggest-close svg {
     width: 1em;
