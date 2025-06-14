@@ -21,8 +21,11 @@ This project targets **Node.js 20**. Run `nvm use` to switch to this version.
 6. Optionally include another MP3 named `cheese.mp3` in the `assets/` directory.
    It will play whenever the suit shirt is placed on the model.
 
-7. When developing locally, the favicon switches to `assets/favicon-dev.svg`
-   so browser tabs are easily distinguished from production.
+
+7. During local development (running on localhost or when `NODE_ENV` is not
+   `production`), the favicon switches to `assets/favicon-dev.svg` so browser
+   tabs are easily distinguished from production.
+
 
 
 All JavaScript is written in vanilla ES modules.
