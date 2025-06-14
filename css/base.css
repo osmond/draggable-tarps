@@ -641,6 +641,10 @@ a:focus-visible {
     pointer-events: auto;
 }
 
+.suggest-marquee:hover {
+    animation-play-state: paused;
+}
+
 @media (prefers-reduced-motion: no-preference) {
     .suggest-marquee {
         animation: suggest-scroll 20s linear forwards;
@@ -659,6 +663,28 @@ a:focus-visible {
     padding: 0.5rem 1rem;
     border-radius: 6px;
     font-family: ui-monospace, monospace;
+}
+
+.suggest-close {
+    background: transparent;
+    border: none;
+    color: #555;
+    font-size: 1.1rem;
+    margin-left: 0.25rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 1.5rem;
+    height: 1.5rem;
+    transition: background-color 0.2s ease;
+}
+
+.suggest-close:hover,
+.suggest-close:focus {
+    background-color: rgba(0, 0, 0, 0.1);
+    outline: none;
 }
 
 @keyframes suggest-scroll {
