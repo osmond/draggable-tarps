@@ -670,12 +670,6 @@ a:focus-visible {
     cursor: pointer;
     line-height: 1;
 }
-.suggest-close svg {
-    width: 1em;
-    height: 1em;
-    stroke: currentColor;
-    fill: none;
-}
 
 @keyframes suggest-scroll {
     from {
