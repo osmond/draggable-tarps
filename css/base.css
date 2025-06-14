@@ -641,6 +641,10 @@ a:focus-visible {
     pointer-events: auto;
 }
 
+.suggest-marquee.float-away {
+    pointer-events: none;
+}
+
 .suggest-marquee:hover {
     animation-play-state: paused;
 }
@@ -649,10 +653,18 @@ a:focus-visible {
     .suggest-marquee {
         animation: suggest-scroll 20s linear forwards;
     }
+
+    .suggest-marquee.float-away {
+        animation: suggest-float-away 0.7s ease forwards;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
     .suggest-marquee {
+        animation: none;
+    }
+
+    .suggest-marquee.float-away {
         animation: none;
     }
 }
@@ -693,6 +705,17 @@ a:focus-visible {
     }
     to {
         transform: translateX(-100%);
+    }
+}
+
+@keyframes suggest-float-away {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-2rem);
+        opacity: 0;
     }
 }
 
