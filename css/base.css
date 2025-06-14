@@ -665,53 +665,23 @@ a:focus-visible {
 }
 
 .suggest-close {
-    background: rgba(0, 0, 0, 0.6);
+    background: transparent;
     border: none;
-    color: #fff;
+    color: #000;
     font-size: 1rem;
     cursor: pointer;
     line-height: 1;
     position: absolute;
     top: 0;
     right: 0;
-    width: 1.5rem;
-    height: 1.5rem;
     transform: translate(50%, -50%);
     margin: 0;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1;
 }
 .suggest-close svg {
-    width: 0.8em;
-    height: 0.8em;
+    width: 1em;
+    height: 1em;
     stroke: currentColor;
     fill: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-    .suggest-close {
-        animation: suggest-close-pop 0.3s ease-out;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .suggest-close {
-        animation: none;
-    }
-}
-
-@keyframes suggest-close-pop {
-    0% {
-        transform: translate(50%, -50%) scale(0.5);
-        opacity: 0;
-    }
-    100% {
-        transform: translate(50%, -50%) scale(1);
-        opacity: 1;
-    }
 }
 
 @keyframes suggest-scroll {
