@@ -728,8 +728,17 @@ document.addEventListener('DOMContentLoaded', () => {
       messageText.textContent = message || defaultMessage;
     }
 
+    const closeButton = document.createElement('button');
+    closeButton.className = 'suggest-close';
+    closeButton.setAttribute('aria-label', 'Close');
+    closeButton.textContent = '\u00D7';
+    closeButton.addEventListener('click', () => {
+      wrapper.remove();
+    });
+
 
     wrapper.appendChild(messageText);
+    wrapper.appendChild(closeButton);
     suggestMessagesContainer.appendChild(wrapper);
 
     wrapper.addEventListener('animationend', () => {
