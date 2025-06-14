@@ -287,6 +287,7 @@ a:focus-visible {
     transition: transform 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     transform-origin: center center;
     will-change: transform;
+    touch-action: none;
 
     filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.08));
 
@@ -639,6 +640,7 @@ a:focus-visible {
     white-space: nowrap;
     position: relative;
     pointer-events: auto;
+    touch-action: none;
 }
 
 .suggest-marquee:hover {
