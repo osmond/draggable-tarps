@@ -4,7 +4,7 @@ This project powers [jonosmond.com](https://jonosmond.com), showcasing AI genera
 
 ## Development
 
-This project targets **Node.js 20**.
+This project targets **Node.js 20**. Run `nvm use` to switch to this version.
 
 1. Install dependencies with `npm install` (requires a local installation of
    Node.js and npm for offline use).
