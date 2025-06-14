@@ -22,9 +22,10 @@ This project targets **Node.js 20**. Run `nvm use` to switch to this version.
    It will play whenever the suit shirt is placed on the model.
 
 
-7. During local development (running on localhost or when `NODE_ENV` is not
-   `production`), the favicon switches to `assets/favicon-dev.svg` so browser
-   tabs are easily distinguished from production.
+7. During local development (running on `localhost`, `127.0.0.1`, or when
+   `NODE_ENV` is not `production`), the favicon switches to
+   `assets/favicon-dev.svg` so browser tabs are easily distinguished from
+   production.
 
 
 
