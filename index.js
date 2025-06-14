@@ -25,11 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const suitCheeseAudio = document.getElementById('suit-cheese-audio');
 
-  // Detect if the user prefers reduced motion to handle animations gracefully
-  const prefersReducedMotion = window.matchMedia(
-    '(prefers-reduced-motion: reduce)'
-  ).matches;
-
   function playAudioExclusive(audioElement) {
     if (!audioElement) return;
     const audios = [firstDropAudio, suitCheeseAudio];
@@ -712,56 +707,6 @@ document.addEventListener('DOMContentLoaded', () => {
       .replace(/'/g, '&#039;');
   }
 
-  function makeMarqueeDraggable(el) {
-    let startX = 0;
-    let startY = 0;
-    let origLeft = 0;
-    let origTop = 0;
-
-    function onStart(e) {
-      e.preventDefault();
-      const rect = el.getBoundingClientRect();
-      startX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
-      startY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
-      origLeft = rect.left;
-      origTop = rect.top;
-      el.style.left = `${origLeft}px`;
-      el.style.top = `${origTop}px`;
-      el.style.transform = 'none';
-      el.classList.add('dragging');
-      el.style.animationPlayState = 'paused';
-
-      document.addEventListener('mousemove', onMove);
-      document.addEventListener('mouseup', onEnd);
-      document.addEventListener('touchmove', onMove, { passive: false });
-      document.addEventListener('touchend', onEnd);
-      document.addEventListener('touchcancel', onEnd);
-    }
-
-    function onMove(e) {
-      e.preventDefault();
-      const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
-      const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
-      const dx = clientX - startX;
-      const dy = clientY - startY;
-      el.style.left = `${origLeft + dx}px`;
-      el.style.top = `${origTop + dy}px`;
-    }
-
-    function onEnd() {
-      el.classList.remove('dragging');
-      el.style.animationPlayState = 'running';
-      document.removeEventListener('mousemove', onMove);
-      document.removeEventListener('mouseup', onEnd);
-      document.removeEventListener('touchmove', onMove);
-      document.removeEventListener('touchend', onEnd);
-      document.removeEventListener('touchcancel', onEnd);
-    }
-
-    el.addEventListener('mousedown', onStart);
-    el.addEventListener('touchstart', onStart, { passive: false });
-  }
-
   function displaySuggestion(text, message, allowHTML = false) {
 
     const wrapper = document.createElement('div');
@@ -791,27 +736,15 @@ document.addEventListener('DOMContentLoaded', () => {
     closeBtn.textContent = '×';
 
     closeBtn.addEventListener('click', () => {
-      wrapper.classList.add('float-away');
-      if (prefersReducedMotion) {
-        // When animations are disabled, remove immediately
-        wrapper.remove();
-      }
+      wrapper.remove();
     });
 
     wrapper.appendChild(closeBtn);
     wrapper.appendChild(messageText);
     suggestMessagesContainer.appendChild(wrapper);
-    makeMarqueeDraggable(wrapper);
 
-
-    wrapper.addEventListener('animationend', (e) => {
-      if (e.animationName === 'suggest-scroll') {
-        wrapper.classList.add('float-away');
-        return;
-      }
-      if (e.animationName === 'suggest-float-away') {
-        wrapper.remove();
-      }
+    wrapper.addEventListener('animationend', () => {
+      wrapper.remove();
     });
 
     setTimeout(() => {
