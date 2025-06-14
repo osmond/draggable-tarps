@@ -739,8 +739,8 @@ document.addEventListener('DOMContentLoaded', () => {
       wrapper.remove();
     });
 
-    wrapper.appendChild(messageText);
     wrapper.appendChild(closeBtn);
+    wrapper.appendChild(messageText);
     suggestMessagesContainer.appendChild(wrapper);
 
     wrapper.addEventListener('animationend', () => {

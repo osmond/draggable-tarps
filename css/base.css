@@ -669,15 +669,15 @@ a:focus-visible {
     background: transparent;
     border: none;
     color: #555;
-    font-size: 1.1rem;
-    margin-left: 0.25rem;
+    font-size: 1.5rem;
+    margin-right: 0.25rem;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 2rem;
+    height: 2rem;
     transition: background-color 0.2s ease;
 }
 
