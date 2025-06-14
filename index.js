@@ -25,6 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const suitCheeseAudio = document.getElementById('suit-cheese-audio');
 
+  const favicon = document.querySelector('link[rel="icon"]');
+  if (favicon && (isDev || window.location.hostname === 'localhost')) {
+    favicon.href = 'assets/favicon-dev.svg';
+  }
+
   function playAudioExclusive(audioElement) {
     if (!audioElement) return;
     const audios = [firstDropAudio, suitCheeseAudio];
