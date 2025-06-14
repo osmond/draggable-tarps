@@ -729,12 +729,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'suggest-close';
+    closeBtn.type = 'button';
+    closeBtn.setAttribute('aria-label', 'Dismiss');
+    closeBtn.textContent = '×';
+
+    closeBtn.addEventListener('click', () => {
+      wrapper.remove();
+    });
+
     wrapper.appendChild(messageText);
+    wrapper.appendChild(closeBtn);
     suggestMessagesContainer.appendChild(wrapper);
 
     wrapper.addEventListener('animationend', () => {
       wrapper.remove();
     });
+
+    setTimeout(() => {
+      if (document.body.contains(wrapper)) {
+        wrapper.remove();
+      }
+    }, 20000);
   }
 
   // Show any previously saved suggestions when the page loads
