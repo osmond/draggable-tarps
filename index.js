@@ -707,6 +707,56 @@ document.addEventListener('DOMContentLoaded', () => {
       .replace(/'/g, '&#039;');
   }
 
+  function makeMarqueeDraggable(el) {
+    let startX = 0;
+    let startY = 0;
+    let origLeft = 0;
+    let origTop = 0;
+
+    function onStart(e) {
+      e.preventDefault();
+      const rect = el.getBoundingClientRect();
+      startX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+      startY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
+      origLeft = rect.left;
+      origTop = rect.top;
+      el.style.left = `${origLeft}px`;
+      el.style.top = `${origTop}px`;
+      el.style.transform = 'none';
+      el.classList.add('dragging');
+      el.style.animationPlayState = 'paused';
+
+      document.addEventListener('mousemove', onMove);
+      document.addEventListener('mouseup', onEnd);
+      document.addEventListener('touchmove', onMove, { passive: false });
+      document.addEventListener('touchend', onEnd);
+      document.addEventListener('touchcancel', onEnd);
+    }
+
+    function onMove(e) {
+      e.preventDefault();
+      const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+      const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
+      const dx = clientX - startX;
+      const dy = clientY - startY;
+      el.style.left = `${origLeft + dx}px`;
+      el.style.top = `${origTop + dy}px`;
+    }
+
+    function onEnd() {
+      el.classList.remove('dragging');
+      el.style.animationPlayState = 'running';
+      document.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseup', onEnd);
+      document.removeEventListener('touchmove', onMove);
+      document.removeEventListener('touchend', onEnd);
+      document.removeEventListener('touchcancel', onEnd);
+    }
+
+    el.addEventListener('mousedown', onStart);
+    el.addEventListener('touchstart', onStart, { passive: false });
+  }
+
   function displaySuggestion(text, message, allowHTML = false) {
 
     const wrapper = document.createElement('div');
@@ -742,6 +792,7 @@ document.addEventListener('DOMContentLoaded', () => {
     wrapper.appendChild(closeBtn);
     wrapper.appendChild(messageText);
     suggestMessagesContainer.appendChild(wrapper);
+    makeMarqueeDraggable(wrapper);
 
 
     wrapper.addEventListener('animationend', (e) => {
