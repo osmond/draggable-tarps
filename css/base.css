@@ -665,21 +665,27 @@ a:focus-visible {
 }
 
 .suggest-close {
-    background: transparent;
+    background: rgba(0, 0, 0, 0.8);
     border: none;
-    color: #000;
+    color: #fff;
     font-size: 1rem;
     cursor: pointer;
     line-height: 1;
     position: absolute;
     top: 0;
-    right: 0;
-    transform: translate(50%, -50%);
+    left: 0;
+    transform: translate(-50%, -50%);
     margin: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .suggest-close svg {
-    width: 1em;
-    height: 1em;
+    width: 0.8em;
+    height: 0.8em;
     stroke: currentColor;
     fill: none;
 }
