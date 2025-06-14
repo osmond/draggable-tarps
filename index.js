@@ -731,10 +731,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeButton = document.createElement('button');
     closeButton.className = 'suggest-close';
     closeButton.setAttribute('aria-label', 'Close');
-    closeButton.innerHTML =
-      '<svg class="close-icon" viewBox="0 0 16 16" aria-hidden="true">' +
-      '<path d="M4 4l8 8m0-8l-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />' +
-      '</svg>';
+    closeButton.textContent = '\u00D7';
     closeButton.addEventListener('click', () => {
       wrapper.remove();
     });
