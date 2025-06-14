@@ -25,6 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const suitCheeseAudio = document.getElementById('suit-cheese-audio');
 
+  // Detect if the user prefers reduced motion to handle animations gracefully
+  const prefersReducedMotion = window.matchMedia(
+    '(prefers-reduced-motion: reduce)'
+  ).matches;
+
   function playAudioExclusive(audioElement) {
     if (!audioElement) return;
     const audios = [firstDropAudio, suitCheeseAudio];
@@ -787,6 +792,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     closeBtn.addEventListener('click', () => {
       wrapper.classList.add('float-away');
+      if (prefersReducedMotion) {
+        // When animations are disabled, remove immediately
+        wrapper.remove();
+      }
     });
 
     wrapper.appendChild(closeBtn);
