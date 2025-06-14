@@ -639,6 +639,12 @@ a:focus-visible {
     white-space: nowrap;
     position: relative;
     pointer-events: auto;
+    cursor: grab;
+    user-select: none;
+}
+
+.suggest-marquee.dragging {
+    cursor: grabbing;
 }
 
 .suggest-marquee.float-away {
