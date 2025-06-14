@@ -743,8 +743,21 @@ document.addEventListener('DOMContentLoaded', () => {
     wrapper.appendChild(messageText);
     suggestMessagesContainer.appendChild(wrapper);
 
-    wrapper.addEventListener('animationend', () => {
-      wrapper.remove();
+    wrapper.addEventListener('mouseenter', () => {
+      const playState = getComputedStyle(wrapper).animationPlayState;
+      if (playState === 'paused') {
+        wrapper.classList.add('float-away');
+      }
+    });
+
+    wrapper.addEventListener('animationend', (e) => {
+      if (e.animationName === 'suggest-scroll') {
+        wrapper.classList.add('float-away');
+        return;
+      }
+      if (e.animationName === 'suggest-float-away') {
+        wrapper.remove();
+      }
     });
 
     setTimeout(() => {
