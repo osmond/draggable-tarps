@@ -26,7 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const suitCheeseAudio = document.getElementById('suit-cheese-audio');
 
   const favicon = document.querySelector('link[rel="icon"]');
-  if (favicon && (isDev || window.location.hostname === 'localhost')) {
+  const devHosts = new Set(['localhost', '127.0.0.1']);
+  if (favicon && (isDev || devHosts.has(window.location.hostname))) {
     favicon.href = 'assets/favicon-dev.svg';
   }
 
