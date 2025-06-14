@@ -707,6 +707,41 @@ document.addEventListener('DOMContentLoaded', () => {
       .replace(/'/g, '&#039;');
   }
 
+  function makeMarqueeDraggable(el) {
+    let offsetX = 0;
+    let offsetY = 0;
+    function onStart(ev) {
+      const pt = ev.touches ? ev.touches[0] : ev;
+      const rect = el.getBoundingClientRect();
+      offsetX = pt.clientX - rect.left;
+      offsetY = pt.clientY - rect.top;
+      el.style.cursor = 'grabbing';
+      el.style.animationPlayState = 'paused';
+      document.addEventListener('mousemove', onMove);
+      document.addEventListener('touchmove', onMove, { passive: false });
+      document.addEventListener('mouseup', onEnd);
+      document.addEventListener('touchend', onEnd);
+      ev.preventDefault();
+    }
+    function onMove(ev) {
+      const pt = ev.touches ? ev.touches[0] : ev;
+      el.style.left = `${pt.clientX - offsetX}px`;
+      el.style.top = `${pt.clientY - offsetY}px`;
+      ev.preventDefault();
+    }
+    function onEnd() {
+      el.style.cursor = 'grab';
+      el.style.animationPlayState = '';
+      document.removeEventListener('mousemove', onMove);
+      document.removeEventListener('touchmove', onMove);
+      document.removeEventListener('mouseup', onEnd);
+      document.removeEventListener('touchend', onEnd);
+    }
+    el.addEventListener('mousedown', onStart);
+    el.addEventListener('touchstart', onStart, { passive: false });
+    el.style.cursor = 'grab';
+  }
+
   function displaySuggestion(text, message, allowHTML = false) {
 
     const wrapper = document.createElement('div');
@@ -742,6 +777,8 @@ document.addEventListener('DOMContentLoaded', () => {
     wrapper.appendChild(closeBtn);
     wrapper.appendChild(messageText);
     suggestMessagesContainer.appendChild(wrapper);
+
+    makeMarqueeDraggable(wrapper);
 
     wrapper.addEventListener('animationend', () => {
       wrapper.remove();
