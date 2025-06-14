@@ -736,19 +736,13 @@ document.addEventListener('DOMContentLoaded', () => {
     closeBtn.textContent = '×';
 
     closeBtn.addEventListener('click', () => {
-      wrapper.remove();
+      wrapper.classList.add('float-away');
     });
 
     wrapper.appendChild(closeBtn);
     wrapper.appendChild(messageText);
     suggestMessagesContainer.appendChild(wrapper);
 
-    wrapper.addEventListener('mouseenter', () => {
-      const playState = getComputedStyle(wrapper).animationPlayState;
-      if (playState === 'paused') {
-        wrapper.classList.add('float-away');
-      }
-    });
 
     wrapper.addEventListener('animationend', (e) => {
       if (e.animationName === 'suggest-scroll') {
