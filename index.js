@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const suggestInput = document.getElementById('suggest-input');
   const suggestSubmit = document.getElementById('suggest-submit');
   const suggestMessagesContainer = document.getElementById('suggest-messages');
+  const suggestList = document.getElementById('suggest-list');
   const suggestError = document.getElementById('suggest-error');
   const shuffleButton = document.getElementById('shuffle-button');
   const firstDropAudio = document.getElementById('first-drop-audio');
@@ -797,15 +798,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 20000);
   }
 
+  function addSuggestionItem(text) {
+    if (!suggestList) return;
+    const item = document.createElement('div');
+    item.className = 'suggest-item';
+    item.textContent = text;
+    suggestList.appendChild(item);
+  }
+
   // Show any previously saved suggestions when the page loads
   loadSuggestions().forEach((s) => {
     if (s && s.text) {
-
       const msg =
         `Do you see ${escapeHtml(s.text)}? If not, send me an ` +
         '<a href="mailto:jonathan.osmond@gmail.com">email</a> and I\'ll be sure to add it!';
       displaySuggestion(s.text, msg, true);
-
+      addSuggestionItem(s.text);
     }
   });
 
@@ -818,6 +826,7 @@ document.addEventListener('DOMContentLoaded', () => {
           items.forEach((item) => {
             if (item && item.text) {
               displaySuggestion(item.text);
+              addSuggestionItem(item.text);
             }
           });
         }
@@ -874,6 +883,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (text) {
         displaySuggestion(text);
+        addSuggestionItem(text);
 
         const stored = loadSuggestions();
         stored.push({ text, time: Date.now() });
