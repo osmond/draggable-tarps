@@ -483,7 +483,9 @@ a:focus-visible {
     font-family: inherit;
     transition: background-color 0.2s ease;
     text-decoration: none;
-    display: inline-flex;
+    display: block;
+    width: fit-content;
+    margin: 0 auto 1rem;
     align-items: center;
 }
 
