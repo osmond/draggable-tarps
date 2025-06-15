@@ -49,6 +49,13 @@ body {
   }
 }
 
+@media (max-width: 767px) {
+  body {
+    background: var(--color-bg);
+    animation: none;
+  }
+}
+
 @media (scripting: enabled) {
   .loading::before,
   .loading::after {
