@@ -17,6 +17,8 @@ function getContentType(filePath) {
       '.jpeg': 'image/jpeg',
       '.jpg': 'image/jpeg',
       '.svg': 'image/svg+xml',
+      '.ico': 'image/x-icon',
+      '.webp': 'image/webp',
       '.json': 'application/json',
       '.mp3': 'audio/mpeg',
     }[ext] || 'application/octet-stream'
