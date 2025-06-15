@@ -6,20 +6,20 @@ This project powers [jonosmond.com](https://jonosmond.com), showcasing AI genera
 
 This project targets **Node.js 20**. Run `nvm use` to switch to this version.
 
-1. Install dependencies with `npm install` (requires a local installation of
-   Node.js and npm for offline use).
-2. Install the browsers needed for Playwright tests with `npx playwright install`.
-3. Run the test suite with `npm test`.
-4. Launch the site with `npm start`. This starts the `server.js` script which only serves static files on [http://localhost:3000](http://localhost:3000). Open the served `index.html` in your browser.
-5. Optionally add a sound effect by placing an MP3 named `first-drop.mp3` in the
+1. Install dependencies with `npm install`. This also installs the browsers
+   needed for Playwright tests.
+2. Run the test suite with `npm test`.
+3. Launch the site with `npm start`. This starts the `server.js` script which
+   only serves static files on [http://localhost:3000](http://localhost:3000). Open the served `index.html` in your browser.
+4. Optionally add a sound effect by placing an MP3 named `first-drop.mp3` in the
    `assets/` directory. It will play the first time a shirt is placed on the
    model during a session.
 
-6. Optionally include another MP3 named `cheese.mp3` in the `assets/` directory.
+5. Optionally include another MP3 named `cheese.mp3` in the `assets/` directory.
    It will play whenever the suit shirt is placed on the model.
 
 
-7. During local development (running on `localhost`, `127.0.0.1`, or when
+6. During local development (running on `localhost`, `127.0.0.1`, or when
    `NODE_ENV` is not `production`), the favicon switches to
    `assets/favicon-dev.svg` so browser tabs are easily distinguished from
    production.
