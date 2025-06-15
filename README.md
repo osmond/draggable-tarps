@@ -45,18 +45,11 @@ over the center image, try it on.
 
 Click the **Suggest a shirt** button in the top corner to share ideas for new designs.
 
-Suggestions are saved in your browser's local storage so they appear again the next
-time you visit the page. When online, they also sync through Firebase Realtime
-Database so everyone can see what other visitors have shared. The Firebase
-configuration used for this live sync is defined directly in
-[index.html](index.html) lines 154–167, so no additional credentials are needed.
-However, you must have an internet connection for suggestions to sync with other
-visitors.
+
 
 Each item in the **Shirt Suggestions** list now includes a small `×` button.
 Click it to remove that suggestion from the list. This deletes it from your
-local storage and also issues a request to the server so it disappears for
-everyone.
+local storage and also removes it from the shared list for everyone.
 
 When you share an idea you'll see a message like "That's a great idea! I would
 love to see him wearing <your shirt idea>!"
