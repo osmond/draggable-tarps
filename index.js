@@ -211,6 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (shuffleButton) {
     shuffleButton.addEventListener('click', () => {
       randomizeShirtPositions();
+      randomizeSuggestListPosition();
     });
   }
 
