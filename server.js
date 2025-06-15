@@ -38,7 +38,7 @@ function getContentType(filePath) {
 }
 
 const server = createServer(async (req, res) => {
-  const { pathname } = parse(req.url);
+  const { pathname, query } = parse(req.url, true);
 
   if (pathname === '/api/suggestions') {
     if (req.method === 'POST') {
@@ -48,10 +48,11 @@ const server = createServer(async (req, res) => {
       });
       req.on('end', async () => {
         try {
-          const { text } = JSON.parse(body || '{}');
+          const { text, time } = JSON.parse(body || '{}');
           if (typeof text === 'string' && text.trim()) {
             const suggestions = await readSuggestions();
-            suggestions.push({ text, time: Date.now() });
+            const ts = typeof time === 'number' ? time : Date.now();
+            suggestions.push({ text, time: ts });
             await writeSuggestions(suggestions);
           }
           res.writeHead(200, { 'Content-Type': 'text/plain' });
@@ -61,6 +62,19 @@ const server = createServer(async (req, res) => {
           res.end('Bad Request');
         }
       });
+      return;
+    } else if (req.method === 'DELETE') {
+      const time = parseInt(query.time, 10);
+      if (!Number.isNaN(time)) {
+        const suggestions = await readSuggestions();
+        const idx = suggestions.findIndex((s) => s.time === time);
+        if (idx !== -1) {
+          suggestions.splice(idx, 1);
+          await writeSuggestions(suggestions);
+        }
+      }
+      res.writeHead(200, { 'Content-Type': 'text/plain' });
+      res.end('OK');
       return;
     } else if (req.method === 'GET') {
       const suggestions = await readSuggestions();
