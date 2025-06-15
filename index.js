@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     makeContainerDraggable(suggestMessagesContainer);
   }
   if (suggestList) {
+    randomizeSuggestListPosition();
     makeContainerDraggable(suggestList);
   }
   const suggestError = document.getElementById('suggest-error');
@@ -160,6 +161,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
       placed.push(shirt.getBoundingClientRect());
     });
+  }
+
+  function randomizeSuggestListPosition() {
+    if (!suggestList) return;
+    const rect = suggestList.getBoundingClientRect();
+    const maxLeft = window.innerWidth - rect.width;
+    const maxTop = window.innerHeight - rect.height;
+    const left = Math.random() * maxLeft;
+    const top = Math.random() * maxTop;
+    suggestList.style.left = `${left}px`;
+    suggestList.style.top = `${top}px`;
+    suggestList.style.right = 'auto';
+    suggestList.style.bottom = 'auto';
   }
 
   preloadImages(uniqueImagePaths, () => {
