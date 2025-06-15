@@ -57,14 +57,20 @@ li {
   letter-spacing: 0.08em;
 }
 
-a,
-button {
+a {
   transition: all 0.2s ease;
 }
 
+button {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  background-color: transparent;
+  border: 1px solid #333;
+  color: #333;
+}
+
 button:hover {
-  font-weight: 600;
-  letter-spacing: 0.03em;
+  background-color: currentColor;
+  color: #fff;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -509,13 +515,9 @@ a:focus-visible {
 #suggest-link {
     cursor: pointer;
     padding: 0.3rem 0.75rem;
-    border: none;
     border-radius: 4px;
-    background-color: var(--color-link);
-    color: #fff;
     font-size: 1rem;
     font-family: inherit;
-    transition: background-color 0.2s ease;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
@@ -524,13 +526,9 @@ a:focus-visible {
 #shuffle-button {
     cursor: pointer;
     padding: 0.3rem 0.75rem;
-    border: none;
     border-radius: 4px;
-    background-color: var(--color-link);
-    color: #fff;
     font-size: 1rem;
     font-family: inherit;
-    transition: background-color 0.2s ease;
     text-decoration: none;
     display: block;
     width: fit-content;
@@ -540,13 +538,6 @@ a:focus-visible {
     z-index: 1100;
 }
 
-#suggest-link:hover {
-    background-color: var(--color-link-hover);
-}
-
-#shuffle-button:hover {
-    background-color: var(--color-link-hover);
-}
 
 #suggest-link .toggle-icon {
     width: 1em;
@@ -610,22 +601,16 @@ a:focus-visible {
 #suggest-submit {
     margin-left: 0.5rem;
     padding: 0.3rem 0.75rem;
-    border: none;
     border-radius: 4px;
-    background-color: var(--color-link);
-    color: #fff;
     font-size: 1rem;
     font-family: inherit;
     cursor: pointer;
-    transition: background-color 0.2s ease;
     display: inline-flex;
     align-items: center;
     justify-content: center;
 }
 
-#suggest-submit:hover {
-    background-color: var(--color-link-hover);
-}
+
 
 #suggest-submit svg {
     width: 1em;
