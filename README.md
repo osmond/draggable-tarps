@@ -45,9 +45,7 @@ over the center image, try it on.
 
 Click the **Suggest a shirt** button in the top corner to share ideas for new designs.
 
-Suggestions are saved in your browser's local storage so they appear again the next
-time you visit the page. They also sync online so everyone can see what other
-visitors have shared.
+
 
 Each item in the **Shirt Suggestions** list now includes a small `×` button.
 Click it to remove that suggestion from the list. This deletes it from your
