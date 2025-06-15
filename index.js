@@ -815,72 +815,65 @@ document.addEventListener('DOMContentLoaded', () => {
       .replace(/'/g, '&#039;');
   }
 
-  function makeMarqueeDraggable(el) {
+  function makeElementDraggable(el, options = {}) {
+    const { onStart, onMove, onEnd, stopPropagation } = options;
     let offsetX = 0;
     let offsetY = 0;
-    function onStart(ev) {
+    function handleStart(ev) {
       const pt = ev.touches ? ev.touches[0] : ev;
       const rect = el.getBoundingClientRect();
       offsetX = pt.clientX - rect.left;
       offsetY = pt.clientY - rect.top;
-      el.style.cursor = 'grabbing';
-      el.style.animationPlayState = 'paused';
-      document.addEventListener('mousemove', onMove);
-      document.addEventListener('touchmove', onMove, { passive: false });
-      document.addEventListener('mouseup', onEnd);
-      document.addEventListener('touchend', onEnd);
+      if (typeof onStart === 'function') onStart(ev);
+      document.addEventListener('mousemove', handleMove);
+      document.addEventListener('touchmove', handleMove, { passive: false });
+      document.addEventListener('mouseup', handleEnd);
+      document.addEventListener('touchend', handleEnd);
       ev.preventDefault();
-      ev.stopPropagation();
+      if (stopPropagation) ev.stopPropagation();
     }
-    function onMove(ev) {
+    function handleMove(ev) {
       const pt = ev.touches ? ev.touches[0] : ev;
       el.style.left = `${pt.clientX - offsetX}px`;
       el.style.top = `${pt.clientY - offsetY}px`;
+      if (typeof onMove === 'function') onMove(ev);
       ev.preventDefault();
     }
-    function onEnd() {
-      el.style.cursor = 'grab';
-      el.style.animationPlayState = '';
-      document.removeEventListener('mousemove', onMove);
-      document.removeEventListener('touchmove', onMove);
-      document.removeEventListener('mouseup', onEnd);
-      document.removeEventListener('touchend', onEnd);
+    function handleEnd(ev) {
+      if (typeof onEnd === 'function') onEnd(ev);
+      document.removeEventListener('mousemove', handleMove);
+      document.removeEventListener('touchmove', handleMove);
+      document.removeEventListener('mouseup', handleEnd);
+      document.removeEventListener('touchend', handleEnd);
     }
-    el.addEventListener('mousedown', onStart);
-    el.addEventListener('touchstart', onStart, { passive: false });
+    el.addEventListener('mousedown', handleStart);
+    el.addEventListener('touchstart', handleStart, { passive: false });
+  }
+
+  function makeMarqueeDraggable(el) {
+    makeElementDraggable(el, {
+      onStart: () => {
+        el.style.cursor = 'grabbing';
+        el.style.animationPlayState = 'paused';
+      },
+      onEnd: () => {
+        el.style.cursor = 'grab';
+        el.style.animationPlayState = '';
+      },
+      stopPropagation: true,
+    });
     el.style.cursor = 'grab';
   }
 
   function makeContainerDraggable(el) {
-    let offsetX = 0;
-    let offsetY = 0;
-    function onStart(ev) {
-      const pt = ev.touches ? ev.touches[0] : ev;
-      const rect = el.getBoundingClientRect();
-      offsetX = pt.clientX - rect.left;
-      offsetY = pt.clientY - rect.top;
-      el.classList.add('dragging');
-      document.addEventListener('mousemove', onMove);
-      document.addEventListener('touchmove', onMove, { passive: false });
-      document.addEventListener('mouseup', onEnd);
-      document.addEventListener('touchend', onEnd);
-      ev.preventDefault();
-    }
-    function onMove(ev) {
-      const pt = ev.touches ? ev.touches[0] : ev;
-      el.style.left = `${pt.clientX - offsetX}px`;
-      el.style.top = `${pt.clientY - offsetY}px`;
-      ev.preventDefault();
-    }
-    function onEnd() {
-      el.classList.remove('dragging');
-      document.removeEventListener('mousemove', onMove);
-      document.removeEventListener('touchmove', onMove);
-      document.removeEventListener('mouseup', onEnd);
-      document.removeEventListener('touchend', onEnd);
-    }
-    el.addEventListener('mousedown', onStart);
-    el.addEventListener('touchstart', onStart, { passive: false });
+    makeElementDraggable(el, {
+      onStart: () => {
+        el.classList.add('dragging');
+      },
+      onEnd: () => {
+        el.classList.remove('dragging');
+      },
+    });
   }
 
   function displaySuggestion(text, message, allowHTML = false) {
