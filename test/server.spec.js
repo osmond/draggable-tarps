@@ -73,4 +73,21 @@ test.describe('static server', () => {
 
     expect(status).toBe(404);
   });
+
+  test('includes security headers', async () => {
+    const headers = await new Promise((resolve, reject) => {
+      http.get(`http://localhost:${port}/index.html`, res => {
+        res.resume();
+        res.on('end', () =>
+          resolve({
+            csp: res.headers['content-security-policy'],
+            xcto: res.headers['x-content-type-options'],
+          })
+        );
+      }).on('error', reject);
+    });
+
+    expect(headers.csp).toContain("default-src 'self'");
+    expect(headers.xcto).toBe('nosniff');
+  });
 });
