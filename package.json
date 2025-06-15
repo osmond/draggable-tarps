@@ -10,7 +10,6 @@
     "postinstall": "npx playwright install --with-deps"
   },
   "devDependencies": {
-    "serve": "^14.2.0",
     "@playwright/test": "1.53.0"
   },
   "engines": {
