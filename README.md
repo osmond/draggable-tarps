@@ -47,10 +47,10 @@ Click the **Suggest a shirt** button in the top corner to share ideas for new de
 
 Suggestions are saved in your browser's local storage so they appear again the next
 time you visit the page. They are also posted to `/api/suggestions` and fetched
-on page load so everyone can see what other visitors have shared. When your
-suggestion reappears you'll see a message like "Do you see <your shirt idea>? If
-not, send me an [email](mailto:jonathan.osmond@gmail.com) and I'll be sure to
-add it!" prompting you to contact me if your idea hasn't been added yet.
+on page load so everyone can see what other visitors have shared.
+
+When you share an idea you'll see a message like "That's a great idea! I would
+love to see him wearing <your shirt idea>!"
 
 
 
