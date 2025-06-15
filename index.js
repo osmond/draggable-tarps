@@ -576,6 +576,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- Keyboard Dragging Support ---
+  // Space or Enter begins/ends a drag. Arrow keys move the shirt.
+  // Press Escape to cancel and return the shirt to its starting position.
   const KEYBOARD_STEP = 10; // pixels moved per arrow press
 
   function handleShirtKeydown(event) {
@@ -586,6 +588,13 @@ document.addEventListener('DOMContentLoaded', () => {
       } else if (activeShirt === event.currentTarget) {
         handleEnd();
       }
+    } else if (
+      event.key === 'Escape' &&
+      keyboardDragging &&
+      activeShirt === event.currentTarget
+    ) {
+      event.preventDefault();
+      cancelKeyboardDrag();
     } else if (keyboardDragging && activeShirt === event.currentTarget) {
       let moved = false;
       if (event.key === 'ArrowUp') {
@@ -654,6 +663,30 @@ document.addEventListener('DOMContentLoaded', () => {
     activeShirt.style.zIndex = '1000';
     activeShirt.classList.add('grabbed');
     keyboardDragging = true;
+  }
+
+  function cancelKeyboardDrag() {
+    if (!activeShirt || !centerImage) return;
+    const shirtToFocus = activeShirt;
+
+    activeShirt.style.left = initialShirtPos.left;
+    activeShirt.style.top = initialShirtPos.top;
+    currentPos.x = parseInt(initialShirtPos.left) || 0;
+    currentPos.y = parseInt(initialShirtPos.top) || 0;
+
+    if (isHoveringCenterImage && originalCenterImageSrc) {
+      centerImage.src = originalCenterImageSrc;
+    }
+
+    activeShirt.style.cursor = 'grab';
+    activeShirt.style.zIndex = '';
+    activeShirt.classList.remove('dragging-right', 'dragging-left', 'grabbed');
+
+    isHoveringCenterImage = false;
+    activeShirt = null;
+    keyboardDragging = false;
+
+    shirtToFocus.focus();
   }
 
   function updateHoverState() {
