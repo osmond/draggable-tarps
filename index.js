@@ -871,7 +871,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!suggestList) return;
     const item = document.createElement('div');
     item.className = 'suggest-item';
-    item.textContent = text;
     if (time) {
       item.dataset.time = time;
     }
@@ -888,6 +887,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
     item.appendChild(delBtn);
+    item.appendChild(document.createTextNode(text));
     suggestList.appendChild(item);
   }
 
