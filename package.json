@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "test": "playwright test",
-    "start": "node server.js"
+    "start": "node server.js",
+    "postinstall": "npx playwright install --with-deps"
   },
   "devDependencies": {
     "serve": "^14.2.0",
