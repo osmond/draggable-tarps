@@ -809,6 +809,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Retrieve suggestions stored on the server and show them to every visitor
+  if (window.location.protocol.startsWith('http')) {
+    fetch('/api/suggestions')
+      .then((res) => res.ok ? res.json() : [])
+      .then((items) => {
+        if (Array.isArray(items)) {
+          items.forEach((item) => {
+            if (item && item.text) {
+              displaySuggestion(item.text);
+            }
+          });
+        }
+      })
+      .catch((err) => {
+        if (isDev) {
+          console.warn('Failed to load suggestions from server', err);
+        }
+      });
+  }
+
   if (suggestLink && suggestInputContainer && suggestInput && suggestSubmit && suggestMessagesContainer) {
     suggestLink.addEventListener('click', (event) => {
       event.preventDefault();
@@ -858,6 +878,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const stored = loadSuggestions();
         stored.push({ text, time: Date.now() });
         saveSuggestions(stored);
+
+        fetch('/api/suggestions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text }),
+        }).catch((err) => {
+          if (isDev) {
+            console.warn('Failed to send suggestion', err);
+          }
+        });
 
         suggestInput.value = '';
         suggestInputContainer.classList.remove('open');
