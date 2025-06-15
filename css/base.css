@@ -634,9 +634,15 @@ a:focus-visible {
     left: 0;
     right: 0;
     overflow: visible;
-    pointer-events: none;
+    pointer-events: auto;
     z-index: 1010;
     text-align: center;
+    cursor: grab;
+    min-height: 1rem;
+}
+
+.suggest-messages.dragging {
+    cursor: grabbing;
 }
 
 
