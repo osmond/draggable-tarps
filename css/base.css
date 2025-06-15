@@ -550,30 +550,6 @@ a:focus-visible {
     background-color: var(--color-link-hover);
 }
 
-.minimal-btn {
-    background-color: transparent;
-    border: 1px solid #333;
-    color: #333;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 0.5rem 1rem;
-    font-family: inherit;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.minimal-btn:hover,
-.minimal-btn:focus {
-    background-color: #333;
-    color: #fff;
-}
-
-.minimal-btn:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.4);
-}
-
 #suggest-link .toggle-icon {
     width: 1em;
     height: 1em;
