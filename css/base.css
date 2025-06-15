@@ -33,7 +33,7 @@ h3,
 nav,
 .mono,
 .code {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'Inter', sans-serif;
 }
 
 h1 {
@@ -409,7 +409,7 @@ a:focus-visible {
     cursor: help;
     z-index: 15;
     transition: border-color 0.2s ease, color 0.2s ease;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'Inter', sans-serif;
 }
 
 #info-tooltip:hover {
@@ -428,7 +428,7 @@ a:focus-visible {
     padding: 5px 10px;
     border-radius: 4px;
     font-size: 1rem;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'Inter', sans-serif;
     white-space: nowrap;
     opacity: 0;
     visibility: hidden;
@@ -831,7 +831,7 @@ a:focus-visible {
 }
 
 .font-mono {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'Inter', sans-serif;
 }
 
 .font-sans {
