@@ -660,16 +660,11 @@ a:focus-visible {
     position: relative;
     pointer-events: auto;
     touch-action: none;
+    animation: suggest-scroll 20s linear forwards;
 }
 
 .suggest-marquee:hover {
     animation-play-state: paused;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-    .suggest-marquee {
-        animation: suggest-scroll 20s linear forwards;
-    }
 }
 
 @media (prefers-reduced-motion: reduce) {
