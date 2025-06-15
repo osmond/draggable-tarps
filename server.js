@@ -6,6 +6,11 @@ import { parse } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+const securityHeaders = {
+  'Content-Security-Policy': "default-src 'self'",
+  'X-Content-Type-Options': 'nosniff'
+};
+
 function getContentType(filePath) {
   const ext = path.extname(filePath).toLowerCase();
   return (
@@ -29,11 +34,11 @@ const server = createServer(async (req, res) => {
   let { pathname } = parse(req.url, true);
 
   // Normalize and sanitize the requested path
-  pathname = path.normalize(decodeURIComponent(pathname));
+  pathname = path.normalize(decodeURIComponent(pathname)).replace(/^\//, '');
 
   // Strip any leading ".." segments or reject absolute paths
   if (pathname.startsWith('..') || path.isAbsolute(pathname)) {
-    res.writeHead(400);
+    res.writeHead(400, securityHeaders);
     res.end('Bad Request');
     return;
   }
@@ -41,7 +46,7 @@ const server = createServer(async (req, res) => {
   // Construct the full file path
   let filePath = path.join(__dirname, pathname);
   if (!filePath.startsWith(__dirname)) {
-    res.writeHead(404);
+    res.writeHead(404, securityHeaders);
     res.end('Not Found');
     return;
   }
@@ -52,10 +57,13 @@ const server = createServer(async (req, res) => {
 
   try {
     const data = await fs.readFile(filePath);
-    res.writeHead(200, { 'Content-Type': getContentType(filePath) });
+    res.writeHead(200, {
+      'Content-Type': getContentType(filePath),
+      ...securityHeaders,
+    });
     res.end(data);
   } catch {
-    res.writeHead(404);
+    res.writeHead(404, securityHeaders);
     res.end('Not Found');
   }
 });
