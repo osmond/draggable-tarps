@@ -3,7 +3,6 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { parse } from 'url';
-import { firebaseConfig } from './config.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -27,19 +26,8 @@ function getContentType(filePath) {
 const server = createServer(async (req, res) => {
   let { pathname } = parse(req.url, true);
 
-
-  if (pathname === '/config.js') {
-    const js = `export const firebaseConfig = ${JSON.stringify(firebaseConfig)};\n` +
-      `if (typeof window !== 'undefined' && window.firebase) {\n` +
-      `  window.firebase.initializeApp(firebaseConfig);\n` +
-      `}`;
-    res.writeHead(200, { 'Content-Type': 'text/javascript' });
-    res.end(js);
-    return;
-  }
-
-  // No API endpoints are currently provided; serve static files only
-
+  // Normalize and sanitize the requested path
+  pathname = path.normalize(decodeURIComponent(pathname));
 
   // Strip any leading ".." segments or reject absolute paths
   if (pathname.startsWith('..') || path.isAbsolute(pathname)) {
