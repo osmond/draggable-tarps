@@ -10,19 +10,31 @@ This project targets **Node.js 20**. Run `nvm use` to switch to this version.
    Node.js and npm for offline use).
 2. Install the browsers needed for Playwright tests with `npx playwright install`.
 3. Run the test suite with `npm test`.
-4. Launch the site with `npm start`. This starts the `server.js` script which
+4. Before launching the site, set the Firebase environment variables used by
+   `config.js`:
+
+   ```sh
+   export FIREBASE_API_KEY=your-key
+   export FIREBASE_AUTH_DOMAIN=your-domain
+   export FIREBASE_DATABASE_URL=your-db-url
+   export FIREBASE_PROJECT_ID=your-project
+   export FIREBASE_STORAGE_BUCKET=your-bucket
+   export FIREBASE_MESSAGING_SENDER_ID=your-sender-id
+   export FIREBASE_APP_ID=your-app-id
+   export FIREBASE_MEASUREMENT_ID=your-measurement-id
+   ```
+
+   These variables are read at runtime when `config.js` is served.
+5. Launch the site with `npm start`. This starts the `server.js` script which
    serves the site and saves shirt suggestions to `suggestions.json` on
    [http://localhost:3000](http://localhost:3000). Open the served
    `index.html` in your browser.
-5. Optionally add a sound effect by placing an MP3 named `first-drop.mp3` in the
+6. Optionally add a sound effect by placing an MP3 named `first-drop.mp3` in the
    `assets/` directory. It will play the first time a shirt is placed on the
    model during a session.
-
-6. Optionally include another MP3 named `cheese.mp3` in the `assets/` directory.
+7. Optionally include another MP3 named `cheese.mp3` in the `assets/` directory.
    It will play whenever the suit shirt is placed on the model.
-
-
-7. During local development (running on `localhost`, `127.0.0.1`, or when
+8. During local development (running on `localhost`, `127.0.0.1`, or when
    `NODE_ENV` is not `production`), the favicon switches to
    `assets/favicon-dev.svg` so browser tabs are easily distinguished from
    production.
