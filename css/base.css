@@ -62,7 +62,6 @@ button {
   transition: all 0.2s ease;
 }
 
-a:hover,
 button:hover {
   font-weight: 600;
   letter-spacing: 0.03em;
@@ -165,26 +164,26 @@ a {
   outline: none;
   cursor: pointer;
   position: relative;
+  overflow: hidden;
 }
 
-/* Underline effect */
-a::after {
-  content: '';
+/* Sliding highlight effect */
+a::before {
+  content: "";
   position: absolute;
-  left: 0;
-  bottom: -2px;
-  width: 0;
-  height: 2px;
-  background: currentColor;
-  transition: width 0.2s ease-in-out;
+  inset: 0;
+  background: var(--color-link-hover);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: -1;
 }
 
 a:hover {
-  color: var(--color-link-hover);
+  color: #fff;
 }
 
-a:hover::after {
-  width: 100%;
+a:hover::before {
+  transform: translateX(0);
 }
 
 a:focus {
