@@ -809,10 +809,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Show any previously saved suggestions when the page loads
   loadSuggestions().forEach((s) => {
     if (s && s.text) {
-      const msg =
-        `Do you see ${escapeHtml(s.text)}? If not, send me an ` +
-        '<a href="mailto:jonathan.osmond@gmail.com">email</a> and I\'ll be sure to add it!';
-      displaySuggestion(s.text, msg, true);
       addSuggestionItem(s.text);
     }
   });
