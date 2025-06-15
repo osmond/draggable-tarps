@@ -766,5 +766,6 @@ a:focus-visible {
 
 .suggest-item {
     margin-bottom: 0.25rem;
+    color: #000;
 }
 
