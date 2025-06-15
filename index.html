@@ -40,7 +40,7 @@
       </div>
     </div>
     <div id="suggest-messages" class="suggest-messages" aria-live="polite"></div>
-    <div id="suggest-list" class="suggest-list">
+    <div id="suggestion-box" class="suggest-list">
       <h2 class="suggest-list-title">Shirt Suggestions</h2>
     </div>
     <main>
@@ -151,6 +151,21 @@
     </audio>
 
 
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyD756akcbfFofdD0RWHDUx9y9-u_lWanIA4",
+        authDomain: "draggable-tarps.firebaseapp.com",
+        databaseURL: "https://draggable-tarps-default-rtdb.firebaseio.com",
+        projectId: "draggable-tarps",
+        storageBucket: "draggable-tarps.appspot.com",
+        messagingSenderId: "271867687042",
+        appId: "1:271867687042:web:a6a559f20ffefdc893c49b",
+        measurementId: "G-JTFVKWHF30",
+      };
+      firebase.initializeApp(firebaseConfig);
+    </script>
     <script type="module" src="index.js"></script>
   </body>
 </html>

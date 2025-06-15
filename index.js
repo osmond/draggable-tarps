@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const suggestInput = document.getElementById('suggest-input');
   const suggestSubmit = document.getElementById('suggest-submit');
   const suggestMessagesContainer = document.getElementById('suggest-messages');
-  const suggestList = document.getElementById('suggest-list');
+  const suggestList = document.getElementById('suggestion-box');
   if (suggestMessagesContainer) {
     makeContainerDraggable(suggestMessagesContainer);
   }
@@ -32,6 +32,30 @@ document.addEventListener('DOMContentLoaded', () => {
   const firstDropAudio = document.getElementById('first-drop-audio');
 
   const suitCheeseAudio = document.getElementById('suit-cheese-audio');
+
+  // --- Firebase Realtime Database Setup ---
+  let firebaseRef = null;
+  if (window.firebase && firebase.database) {
+    firebaseRef = firebase.database().ref('suggestions');
+    firebaseRef.on('child_added', (snapshot) => {
+      const val = snapshot.val() || {};
+      const text = val.text;
+      const time = val.time;
+      if (!text) return;
+      const exists = document.querySelector(
+        `#suggestion-box .suggest-item[data-time="${time}"]`
+      );
+      if (!exists) {
+        displaySuggestion(text);
+        addSuggestionItem(text, time);
+        const stored = loadSuggestions();
+        if (!stored.some((s) => s.time === time)) {
+          stored.push({ text, time });
+          saveSuggestions(stored);
+        }
+      }
+    });
+  }
 
   const favicon = document.querySelector('link[rel="icon"]');
   const devHosts = new Set(['localhost', '127.0.0.1']);
@@ -732,12 +756,20 @@ document.addEventListener('DOMContentLoaded', () => {
       stored.splice(idx, 1);
       saveSuggestions(stored);
     }
-    if (window.location.protocol.startsWith('http')) {
-      fetch(`/api/suggestions?time=${time}`, { method: 'DELETE' }).catch((err) => {
-        if (isDev) {
-          console.warn('Failed to delete suggestion', err);
-        }
-      });
+    if (firebaseRef) {
+      firebaseRef
+        .orderByChild('time')
+        .equalTo(Number(time))
+        .limitToFirst(1)
+        .once('value')
+        .then((snap) => {
+          snap.forEach((child) => child.ref.remove());
+        })
+        .catch((err) => {
+          if (isDev) {
+            console.warn('Failed to delete suggestion', err);
+          }
+        });
     }
   }
 
@@ -898,26 +930,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Retrieve suggestions stored on the server and show them to every visitor
-  if (window.location.protocol.startsWith('http')) {
-    fetch('/api/suggestions')
-      .then((res) => res.ok ? res.json() : [])
-      .then((items) => {
-        if (Array.isArray(items)) {
-          items.forEach((item) => {
-            if (item && item.text) {
-              displaySuggestion(item.text);
-              addSuggestionItem(item.text, item.time);
-            }
-          });
-        }
-      })
-      .catch((err) => {
-        if (isDev) {
-          console.warn('Failed to load suggestions from server', err);
-        }
-      });
-  }
 
   if (suggestLink && suggestInputContainer && suggestInput && suggestSubmit && suggestMessagesContainer) {
     suggestLink.addEventListener('click', (event) => {
@@ -971,15 +983,10 @@ document.addEventListener('DOMContentLoaded', () => {
         stored.push({ text, time });
         saveSuggestions(stored);
 
-        fetch('/api/suggestions', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ text, time }),
-        }).catch((err) => {
-          if (isDev) {
-            console.warn('Failed to send suggestion', err);
-          }
-        });
+        if (firebaseRef) {
+          firebaseRef.push({ text, time });
+        }
+
 
         suggestInput.value = '';
         suggestInputContainer.classList.remove('open');
