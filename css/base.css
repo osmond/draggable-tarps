@@ -246,6 +246,8 @@ a:focus-visible {
     font-family: ui-monospace, monospace;
     text-align: center;
     color: #333;
+    position: relative;
+    z-index: 1100;
 }
 
 
@@ -487,6 +489,8 @@ a:focus-visible {
     width: fit-content;
     margin: 0 auto 1rem;
     align-items: center;
+    position: relative;
+    z-index: 1100;
 }
 
 #suggest-link:hover {
