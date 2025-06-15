@@ -23,6 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (suggestMessagesContainer) {
     makeContainerDraggable(suggestMessagesContainer);
   }
+  if (suggestList) {
+    makeContainerDraggable(suggestList);
+  }
   const suggestError = document.getElementById('suggest-error');
   const shuffleButton = document.getElementById('shuffle-button');
   const firstDropAudio = document.getElementById('first-drop-audio');

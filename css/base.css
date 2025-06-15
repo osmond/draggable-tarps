@@ -749,7 +749,12 @@ a:focus-visible {
     border-radius: 6px;
     font-family: ui-monospace, monospace;
     font-size: 0.9rem;
+    cursor: grab;
     z-index: 1005;
+}
+
+.suggest-list.dragging {
+    cursor: grabbing;
 }
 
 .suggest-list-title {
