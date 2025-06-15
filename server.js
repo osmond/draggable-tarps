@@ -25,7 +25,8 @@ function getContentType(filePath) {
 }
 
 const server = createServer(async (req, res) => {
-  const { pathname } = parse(req.url, true);
+  let { pathname } = parse(req.url, true);
+
 
   if (pathname === '/config.js') {
     const js = `export const firebaseConfig = ${JSON.stringify(firebaseConfig)};\n` +
@@ -39,7 +40,22 @@ const server = createServer(async (req, res) => {
 
   // No API endpoints are currently provided; serve static files only
 
+
+  // Strip any leading ".." segments or reject absolute paths
+  if (pathname.startsWith('..') || path.isAbsolute(pathname)) {
+    res.writeHead(400);
+    res.end('Bad Request');
+    return;
+  }
+
+  // Construct the full file path
   let filePath = path.join(__dirname, pathname);
+  if (!filePath.startsWith(__dirname)) {
+    res.writeHead(404);
+    res.end('Not Found');
+    return;
+  }
+
   if (pathname === '/' || !path.extname(pathname)) {
     filePath = path.join(__dirname, pathname === '/' ? 'index.html' : `${pathname}.html`);
   }

@@ -10,6 +10,7 @@ This project targets **Node.js 20**. Run `nvm use` to switch to this version.
    Node.js and npm for offline use).
 2. Install the browsers needed for Playwright tests with `npx playwright install`.
 3. Run the test suite with `npm test`.
+
 4. Before launching the site, set the Firebase environment variables used by
    `config.js`:
 
@@ -30,6 +31,7 @@ This project targets **Node.js 20**. Run `nvm use` to switch to this version.
    [http://localhost:3000](http://localhost:3000). Open the served
    `index.html` in your browser.
 6. Optionally add a sound effect by placing an MP3 named `first-drop.mp3` in the
+
    `assets/` directory. It will play the first time a shirt is placed on the
    model during a session.
 7. Optionally include another MP3 named `cheese.mp3` in the `assets/` directory.
@@ -55,18 +57,13 @@ over the center image, try it on.
 
 ## Suggesting Shirts
 
-Click the **Suggest a shirt** button in the top corner to share ideas for new designs.
-
-
-
+Click the **Suggest a shirt** button in the top corner to share ideas for new designs. Shirt ideas are stored in your browser's localStorage and sent to Firebase so they appear for everyone.
 Each item in the **Shirt Suggestions** list now includes a small `×` button.
 Click it to remove that suggestion from the list. This deletes it from your
 local storage and also removes it from the shared list for everyone.
 
 When you share an idea you'll see a message like "That's a great idea! I would
 love to see him wearing <your shirt idea>!"
-
-
 
 ## License
 
