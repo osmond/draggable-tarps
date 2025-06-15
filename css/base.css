@@ -774,5 +774,29 @@ a:focus-visible {
 .suggest-item {
     margin-bottom: 0.25rem;
     color: #000;
+    display: flex;
+    align-items: center;
+}
+
+.suggest-delete {
+    background: transparent;
+    border: none;
+    color: #555;
+    font-size: 1rem;
+    margin-left: 0.25rem;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 1.25rem;
+    height: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+.suggest-delete:hover,
+.suggest-delete:focus {
+    background-color: rgba(0, 0, 0, 0.1);
+    outline: none;
 }
 

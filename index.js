@@ -725,6 +725,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function removeSuggestion(time) {
+    const stored = loadSuggestions();
+    const idx = stored.findIndex((s) => s.time === Number(time));
+    if (idx !== -1) {
+      stored.splice(idx, 1);
+      saveSuggestions(stored);
+    }
+    if (window.location.protocol.startsWith('http')) {
+      fetch(`/api/suggestions?time=${time}`, { method: 'DELETE' }).catch((err) => {
+        if (isDev) {
+          console.warn('Failed to delete suggestion', err);
+        }
+      });
+    }
+  }
+
   function escapeHtml(str) {
     return str
       .replace(/&/g, '&amp;')
@@ -851,18 +867,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 20000);
   }
 
-  function addSuggestionItem(text) {
+  function addSuggestionItem(text, time) {
     if (!suggestList) return;
     const item = document.createElement('div');
     item.className = 'suggest-item';
     item.textContent = text;
+    if (time) {
+      item.dataset.time = time;
+    }
+    const delBtn = document.createElement('button');
+    delBtn.className = 'suggest-delete';
+    delBtn.type = 'button';
+    delBtn.setAttribute('aria-label', 'Remove suggestion');
+    delBtn.textContent = '×';
+    delBtn.addEventListener('click', () => {
+      const t = item.dataset.time;
+      item.remove();
+      if (t) {
+        removeSuggestion(t);
+      }
+    });
+    item.appendChild(delBtn);
     suggestList.appendChild(item);
   }
 
   // Show any previously saved suggestions when the page loads
   loadSuggestions().forEach((s) => {
     if (s && s.text) {
-      addSuggestionItem(s.text);
+      addSuggestionItem(s.text, s.time);
     }
   });
 
@@ -875,7 +907,7 @@ document.addEventListener('DOMContentLoaded', () => {
           items.forEach((item) => {
             if (item && item.text) {
               displaySuggestion(item.text);
-              addSuggestionItem(item.text);
+              addSuggestionItem(item.text, item.time);
             }
           });
         }
@@ -931,17 +963,18 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       if (text) {
+        const time = Date.now();
         displaySuggestion(text);
-        addSuggestionItem(text);
+        addSuggestionItem(text, time);
 
         const stored = loadSuggestions();
-        stored.push({ text, time: Date.now() });
+        stored.push({ text, time });
         saveSuggestions(stored);
 
         fetch('/api/suggestions', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ text }),
+          body: JSON.stringify({ text, time }),
         }).catch((err) => {
           if (isDev) {
             console.warn('Failed to send suggestion', err);

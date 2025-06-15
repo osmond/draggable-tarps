@@ -49,6 +49,11 @@ Suggestions are saved in your browser's local storage so they appear again the n
 time you visit the page. They are also posted to `/api/suggestions` and fetched
 on page load so everyone can see what other visitors have shared.
 
+Each item in the **Shirt Suggestions** list now includes a small `×` button.
+Click it to remove that suggestion from the list. This deletes it from your
+local storage and also issues a request to the server so it disappears for
+everyone.
+
 When you share an idea you'll see a message like "That's a great idea! I would
 love to see him wearing <your shirt idea>!"
 
